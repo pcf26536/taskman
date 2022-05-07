@@ -10,6 +10,8 @@ import { TaskModalComponent } from './task-modal/task-modal.component';
 import { NotificationComponent } from './notification/notification.component';
 import { TaskCardComponent } from './task-card/task-card.component';
 import { ReminderModalComponent } from './reminder-modal/reminder-modal.component';
+import { BackdropComponent } from './backdrop/backdrop.component';
+import { TrashBarComponent } from './trash-bar/trash-bar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ReminderModalComponent } from './reminder-modal/reminder-modal.componen
     TaskModalComponent,
     NotificationComponent,
     TaskCardComponent,
-    ReminderModalComponent
+    ReminderModalComponent,
+    BackdropComponent,
+    TrashBarComponent
   ],
   imports: [
     BrowserModule,
