@@ -12,6 +12,10 @@ import { TaskCardComponent } from './task-card/task-card.component';
 import { ReminderModalComponent } from './reminder-modal/reminder-modal.component';
 import { BackdropComponent } from './backdrop/backdrop.component';
 import { TrashBarComponent } from './trash-bar/trash-bar.component';
+import { TaskViewComponent } from './task-view/task-view.component';
+import { TodayViewComponent } from './today-view/today-view.component';
+import { CalendarViewComponent } from './calendar-view/calendar-view.component';
+import { TrashViewComponent } from './trash-view/trash-view.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,11 @@ import { TrashBarComponent } from './trash-bar/trash-bar.component';
     TaskCardComponent,
     ReminderModalComponent,
     BackdropComponent,
-    TrashBarComponent
+    TrashBarComponent,
+    TaskViewComponent,
+    TodayViewComponent,
+    CalendarViewComponent,
+    TrashViewComponent
   ],
   imports: [
     BrowserModule,

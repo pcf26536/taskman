@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACP,UAAU,EAAE,MAAM;EAClB,WAAW,EAAE,GAAG;EAChB,SAAS,EAAE,IAAI;CAalB;;AAhBD,AAKI,UALM,CAKN,MAAM,CAAC;EACH,KAAK,EAAE,OAAO;EACd,WAAW,EAAE,GAAG;EAChB,SAAS,EAAE,IAAI;EACf,WAAW,EAAE,IAAI;EACjB,OAAO,EAAE,QAAQ;CACpB;;AAXL,AAaI,UAbM,CAaN,MAAM,AAAA,MAAM,CAAC;EACT,gBAAgB,EAAE,OAAO;CAC5B",
+    "sources": [
+        "trash-bar.component.scss"
+    ],
+    "names": [],
+    "file": "trash-bar.component.css"
+}

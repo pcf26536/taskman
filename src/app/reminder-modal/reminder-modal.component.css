@@ -1,0 +1,50 @@
+#reminder-modal {
+  width: 200px;
+  padding: 15px 0;
+  color: #494949;
+  border: 1px solid black;
+}
+
+#reminder-modal div {
+  border-bottom: 1px solid #DDDDDD;
+  width: 85%;
+  padding: 0 15px 5px;
+}
+
+#reminder-modal input {
+  display: block;
+  height: 30px;
+  width: 80%;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid #DDDDDD;
+  margin: 0 15px;
+}
+
+#reminder-modal input ::-webkit-input-placeholder {
+  color: #494949;
+}
+
+#reminder-modal input :-ms-input-placeholder {
+  color: #494949;
+}
+
+#reminder-modal input ::-ms-input-placeholder {
+  color: #494949;
+}
+
+#reminder-modal input ::placeholder {
+  color: #494949;
+}
+
+#reminder-modal button {
+  margin-top: 15px;
+  position: relative;
+  left: 140px;
+}
+
+#reminder-modal button:hover {
+  background-color: #E4E4E4;
+}
+/*# sourceMappingURL=reminder-modal.component.css.map */

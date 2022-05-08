@@ -1,0 +1,17 @@
+#trash-bar {
+    font-style: italic;
+    font-weight: 600;
+    font-size: 16px;
+
+    button {
+        color: #DC2323;
+        font-weight: 600;
+        font-size: 16px;
+        margin-left: 30px;
+        padding: .5em 1em;
+    }
+
+    button:hover {
+        background-color: #FFF4F4;
+    }
+}

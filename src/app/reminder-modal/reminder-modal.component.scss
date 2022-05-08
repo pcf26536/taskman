@@ -1,0 +1,36 @@
+#reminder-modal {
+    width: 200px;
+    padding: 15px 0;
+    color: #494949;
+    border: 1px solid black;
+    
+    div {
+        border-bottom: 1px solid #DDDDDD;
+        width: 85%;
+        padding: 0 15px 5px;
+    }
+
+    input {
+        display: block;
+        height: 30px;
+        width: 80%;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 1px solid #DDDDDD;
+        margin: 0 15px;
+        ::placeholder {
+            color: #494949;
+        }
+    }
+
+    button {
+        margin-top: 15px;
+        position: relative;
+        left: 140px;
+    }
+
+    button:hover {
+        background-color: #E4E4E4;
+    }
+}

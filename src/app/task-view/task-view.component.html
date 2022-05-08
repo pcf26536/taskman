@@ -1,0 +1,33 @@
+<div id="task-view">
+    <app-create-task-field></app-create-task-field>
+    <app-trash-bar class="hidden"></app-trash-bar>
+    <div id="categories">
+        <div id="pinned" class="category">
+            <div class="category-title">pinned</div>
+            <div class="tasks-row">
+                <app-task-card></app-task-card>
+                <app-task-card></app-task-card>
+                <app-task-card></app-task-card>
+                <app-task-card></app-task-card>
+                <app-task-card></app-task-card>
+                <app-task-card></app-task-card>
+            </div>
+        </div>
+        <div id="others" class="category">
+            <div class="category-title">others</div>
+            <div class="tasks-row">
+                <app-task-card></app-task-card>
+                <app-task-card></app-task-card>
+                <app-task-card></app-task-card>
+                <app-task-card></app-task-card>
+                <app-task-card></app-task-card>
+                <app-task-card></app-task-card>
+            </div>
+        </div>
+    </div>
+    <app-today-view class="hidden"></app-today-view>
+    <app-trash-view class="hidden"></app-trash-view>
+    <div id="search-results" class="tasks=row">
+    </div>
+    <app-calendar-view></app-calendar-view>
+</div>

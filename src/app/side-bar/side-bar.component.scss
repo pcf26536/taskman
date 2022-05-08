@@ -1,0 +1,48 @@
+#sidebar {
+    position: fixed;
+    top: 5em;
+    height: 100vh;
+    //padding-left: 3vw;
+    left: 0;
+    bottom: 0;
+    width: 14vw;
+    background-color: #ffffff;
+    z-index: 5;
+    overflow-x: hidden;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 1em 0;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 1em 3vw;
+    border-radius: 0px 50px 50px 0px;
+    
+    svg {
+        margin-right: 10px;
+    }
+
+}
+
+.menu-item.active {
+    background-color: #FEEFC3;
+}
+
+.menu-item:hover {
+    border: 1px solid #DDDDDD;
+}
+
+#copyright {
+    color: #999999;
+    font-size: 15px;
+    margin-top: 10vh;
+    padding: 1em 3vw;
+}
+
+.bottom {
+    margin-top: 42vh;
+}
+

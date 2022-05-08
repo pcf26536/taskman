@@ -1,0 +1,46 @@
+#task-card {
+  border: 1px solid #DDDDDD;
+  width: 240px;
+  padding: 1.5em;
+  display: -ms-grid;
+  display: grid;
+  gap: 20px;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+#task-card:hover {
+  -webkit-filter: drop-shadow(-1px -1px 2px rgba(102, 102, 102, 0.25)) drop-shadow(2px 2px 3px rgba(102, 102, 102, 0.25));
+          filter: drop-shadow(-1px -1px 2px rgba(102, 102, 102, 0.25)) drop-shadow(2px 2px 3px rgba(102, 102, 102, 0.25));
+}
+
+.action-buttons {
+  width: 15%;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  -webkit-column-gap: 20px;
+          column-gap: 20px;
+}
+
+.reminder-label {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.action-buttons {
+  width: 15%;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+/*# sourceMappingURL=task-card.component.css.map */

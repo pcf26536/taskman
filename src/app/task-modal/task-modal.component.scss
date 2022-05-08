@@ -1,0 +1,89 @@
+#task-modal {
+    width: 583px;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-font-smoothing: antialiased;
+    background-color: #ffffff;
+    z-index: 20;
+    filter: drop-shadow(-2px -2px 3px rgba(102, 102, 102, 0.25)) drop-shadow(2px 2px 3px rgba(102, 102, 102, 0.25));
+    //display: grid;
+    grid-template-rows: auto;
+    row-gap: 20px;
+}
+
+#reminder-notification {
+    //display: flex;
+    justify-content: space-between;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    border-radius: 15px 15px 0 0;
+}
+
+button {
+    padding: .5em 1em;
+}
+
+button:hover {
+    background-color: #E4E4E4;
+}
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.action-buttons div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 40%;
+}
+
+#edited-label {
+    font-weight: 300;
+    color: #666666;
+}
+
+.title-row {
+    margin-top: 1.5em;
+    padding: 0 1.5em;
+    input  {
+        font-weight: 600;
+    }
+}
+
+textarea, input {
+    border: 0;
+    color: #000000;
+}
+
+input {
+    padding: .5em 1em;
+    width: fit-content;
+    font-size: 16px;
+}
+
+textarea {
+    width: 87%;
+    margin: 0 2em;
+    padding: 1em .5em;
+    resize: none;
+    height: 50%;
+    font-size: 15px;
+}
+
+input::placeholder, ::placeholder {
+    color: #000000;
+}
+
+.labels, .action-buttons {
+    margin: 0 2em;
+}
+
+.action-buttons {
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 20px;
+}

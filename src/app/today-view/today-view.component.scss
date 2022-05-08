@@ -1,0 +1,19 @@
+#today-header {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    align-items: center;
+    column-gap: 20px;
+    width: fit-content;
+}
+
+button {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(2, auto);
+    column-gap: 5px;
+    padding: .5em 1em;
+}
+
+button:hover {
+    background-color: #E4E4E4;
+}

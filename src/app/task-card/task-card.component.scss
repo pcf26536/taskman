@@ -1,0 +1,32 @@
+#task-card {
+    border: 1px solid #DDDDDD;
+    width: 240px;
+    padding: 1.5em;
+    display: grid;
+    gap: 20px;
+    grid-template-rows: auto;
+    cursor: pointer;
+    background-color: #ffffff;
+}
+
+#task-card:hover {
+    filter: drop-shadow(-1px -1px 2px rgba(102, 102, 102, 0.25)) drop-shadow(2px 2px 3px rgba(102, 102, 102, 0.25));
+}
+
+.action-buttons {
+    width: 15%;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px;
+}
+
+.reminder-label {
+    width: fit-content;
+}
+
+.action-buttons {
+    width: 15%;
+    grid-template-columns: repeat(2, 1fr);
+    width: fit-content;
+}

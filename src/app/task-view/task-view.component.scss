@@ -1,0 +1,22 @@
+#task-view {
+    position: relative;
+    top: 4em;
+    padding: 1.5em 3vw 4em;
+    right: 0;
+    bottom: 0;
+    left: 16vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 76vw;
+}
+
+.category-title {
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+// remove on final app
+#others, #pinned {
+    //display: none;
+}
