@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { preloadedTasks } from 'src/shared/data';
 import { LinkedList } from './linked-list.model';
 import { BehaviorSubject } from "rxjs";
+import { Node } from './node.model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,8 +48,17 @@ export class TasksService {
     this.trashList.next(this.trash);
    }
 
-   addTask() {
 
+   nextPinnedList(pinned: LinkedList) {
+    this.pinnedList.next(pinned);
+    }
+
+   addTask(task: Node) {
+    this.pinned.insertInBegin(task.type, task.title, task.edited, task.created, Date.now(), task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.done);
+    //this.pinnedList.next(this.pinned);
+    this.nextPinnedList(this.pinned);
+    //console.log(task.description);
+    //console.log(this.pinned.size());
    }
 
    deleteTask() {

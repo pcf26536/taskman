@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs";
+import { taskTypes } from 'src/shared/data';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,10 @@ export class ModalService {
   private reminderModal = new BehaviorSubject(false);
   sharedReminderModal = this.reminderModal.asObservable();
 
+  // task type update
+  private selectedType = new BehaviorSubject(taskTypes.text);
+  sharedSelectedType = this.selectedType.asObservable();
+
   constructor() { }
 
   // next modal states
@@ -23,6 +28,12 @@ export class ModalService {
   nextReminderModalState(reminderModal: boolean) {
     this.reminderModal.next(reminderModal);
   }
+
+  // selected task type
+  nextSelectedType(selectedType: string) {
+    this.selectedType.next(selectedType);
+  }
+
 
   toggleModal(mode: number) {
     /* MODES
@@ -39,11 +50,13 @@ export class ModalService {
         this.taskModal.next(true);
         // pass task values
         // activate description div
+        this.selectedType.next(taskTypes.text);
         break;
       }
       case 1: {
         this.taskModal.next(true);
         // activate description div
+        this.selectedType.next(taskTypes.text);
         break;
       }
       case 4: {
@@ -59,11 +72,13 @@ export class ModalService {
         this.taskModal.next(true);
         // pass list item values
         // activate list items div
+        this.selectedType.next(taskTypes.list);
         break;
       }
       case 2: {
         this.taskModal.next(true);
         // activate list items div
+        this.selectedType.next(taskTypes.list);
         break;
       }
       case 7: {

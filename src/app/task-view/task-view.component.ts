@@ -30,12 +30,18 @@ export class TaskViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.tasksService.sharedPinnedList.subscribe(list => this.pinnedTasks = list);
-    this.pinned = this.pinnedTasks.traverse();
-    this.tasksService.sharedOthersList.subscribe(list => this.othersTasks = list);
-    this.others = this.othersTasks.traverse();
-    this.tasksService.sharedTrashList.subscribe(list => this.trashTasks = list);
-    this.trash = this.trashTasks.traverse();
+    this.tasksService.sharedPinnedList.subscribe(list => {
+      this.pinnedTasks = list;
+      this.pinned = this.pinnedTasks.traverse();
+    });
+    this.tasksService.sharedOthersList.subscribe(list => {
+      this.othersTasks = list;
+      this.others = this.othersTasks.traverse();
+    });
+    this.tasksService.sharedTrashList.subscribe(list => {
+      this.trashTasks = list;
+      this.trash = this.trashTasks.traverse();
+    });
   }
 
 }
