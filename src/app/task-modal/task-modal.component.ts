@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ModalService } from '../modal.service';
 
 @Component({
   selector: 'app-task-modal',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskModalComponent implements OnInit {
 
-  constructor() { }
+  @Input() taskModal: boolean = false;
+
+  constructor(public modalService: ModalService) { }
 
   ngOnInit(): void {
   }

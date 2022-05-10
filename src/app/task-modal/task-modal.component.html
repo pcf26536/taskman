@@ -1,4 +1,4 @@
-<div id="task-modal" class="task hidden">
+<div id="task-modal" class="task" *ngIf="taskModal">
     <div id="reminder-notification" class="notification hidden">
         <div id="sent-date">Sent Date, Time</div>
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="icon-button">
@@ -79,6 +79,6 @@
             </svg>
         </div>
             
-        <button type="submit">Close</button>
+        <button type="submit" (click)="this.modalService.toggleModal(7)">Close</button>
     </div>
 </div>

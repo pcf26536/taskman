@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-backdrop',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./backdrop.component.scss']
 })
 export class BackdropComponent implements OnInit {
+
+  @Input() taskModal: boolean = false;
 
   constructor() { }
 

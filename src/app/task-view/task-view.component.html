@@ -1,33 +1,23 @@
 <div id="task-view">
-    <app-create-task-field></app-create-task-field>
-    <app-trash-bar class="hidden"></app-trash-bar>
-    <div id="categories">
+    <app-create-task-field *ngIf="createTaskField"></app-create-task-field>
+    <app-trash-bar *ngIf="trashBar"></app-trash-bar>
+    <div id="categories" *ngIf="allTasks">
         <div id="pinned" class="category">
             <div class="category-title">pinned</div>
             <div class="tasks-row">
-                <app-task-card></app-task-card>
-                <app-task-card></app-task-card>
-                <app-task-card></app-task-card>
-                <app-task-card></app-task-card>
-                <app-task-card></app-task-card>
-                <app-task-card></app-task-card>
+                <app-task-card *ngFor="let task of pinned" [taskTitle]="task.title" [pinnedStatus]="true" [description]="task.description"></app-task-card>
             </div>
         </div>
         <div id="others" class="category">
             <div class="category-title">others</div>
             <div class="tasks-row">
-                <app-task-card></app-task-card>
-                <app-task-card></app-task-card>
-                <app-task-card></app-task-card>
-                <app-task-card></app-task-card>
-                <app-task-card></app-task-card>
-                <app-task-card></app-task-card>
+                <app-task-card *ngFor="let other of others" [taskTitle]="other.title" [pinnedStatus]="false" [description]="other.description"></app-task-card>
             </div>
         </div>
     </div>
-    <app-today-view class="hidden"></app-today-view>
-    <app-trash-view class="hidden"></app-trash-view>
-    <div id="search-results" class="tasks=row">
+    <app-today-view *ngIf="todayView"></app-today-view>
+    <app-trash-view *ngIf="trashView" [trash]="trash"></app-trash-view>
+    <div id="search-results" class="tasks-row" *ngIf="searchResults">
     </div>
-    <app-calendar-view></app-calendar-view>
+    <app-calendar-view *ngIf="calenderView"></app-calendar-view>
 </div>

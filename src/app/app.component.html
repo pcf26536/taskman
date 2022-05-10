@@ -1,8 +1,9 @@
-<app-top-bar></app-top-bar>
-<app-side-bar></app-side-bar>
-<app-task-view></app-task-view>
-<app-task-modal></app-task-modal>
-<app-reminder-modal></app-reminder-modal>
-<app-notification></app-notification>
-<app-backdrop></app-backdrop>
-<router-outlet></router-outlet>
+<router-outlet>
+    <app-top-bar></app-top-bar>
+    <app-side-bar [allTasks]="allTasks" [todayView]="todayView" [calenderView]="calenderView" [trashView]="trashView"></app-side-bar>
+    <app-task-view [allTasks]="allTasks" [todayView]="todayView" [calenderView]="calenderView" [trashView]="trashView" [searchResults]="searchResults" [createTaskField]="createTaskField" [trashBar]="trashBar"></app-task-view>
+    <app-backdrop [taskModal]="taskModal"></app-backdrop>
+    <app-task-modal [taskModal]="taskModal"></app-task-modal>
+    <app-reminder-modal [reminderModal]="reminderModal"></app-reminder-modal>
+    <app-notification></app-notification>
+</router-outlet>

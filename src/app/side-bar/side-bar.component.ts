@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { NavigationService } from '../navigation.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideBarComponent implements OnInit {
 
-  constructor() { }
+  @Input() allTasks: boolean = true;
+
+  @Input() todayView: boolean = false;
+
+  @Input() calenderView: boolean = false;
+
+  @Input() trashView: boolean = false;
+
+  @Input() searchResults: boolean = false;
+
+  constructor(private navigation: NavigationService) { }
 
   ngOnInit(): void {
+  }
+
+  requestView(viewNumber: number) {
+    this.navigation.switchView(viewNumber);
   }
 
 }

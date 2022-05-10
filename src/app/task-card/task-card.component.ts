@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ModalService } from '../modal.service';
 
 @Component({
   selector: 'app-task-card',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskCardComponent implements OnInit {
 
-  constructor() { }
+  // task card inputs
+  @Input() taskTitle: string = '';
+  @Input() pinnedStatus: boolean = false;
+  @Input() description: string = '';
+
+  constructor(public modalService: ModalService) { }
 
   ngOnInit(): void {
   }

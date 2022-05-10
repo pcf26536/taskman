@@ -1,12 +1,7 @@
 <div id="trash-view">
     <div class="category">
         <div class="tasks-row">
-            <app-task-card></app-task-card>
-            <app-task-card></app-task-card>
-            <app-task-card></app-task-card>
-            <app-task-card></app-task-card>
-            <app-task-card></app-task-card>
-            <app-task-card></app-task-card>
+            <app-task-card *ngFor="let task of trash" [taskTitle]="task.title" [pinnedStatus]="task.pinned" [description]="task.description"></app-task-card>
         </div>
     </div>
 </div>

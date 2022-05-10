@@ -8,7 +8,7 @@
     background-color: #ffffff;
     z-index: 20;
     filter: drop-shadow(-2px -2px 3px rgba(102, 102, 102, 0.25)) drop-shadow(2px 2px 3px rgba(102, 102, 102, 0.25));
-    //display: grid;
+    display: grid;
     grid-template-rows: auto;
     row-gap: 20px;
 }
