@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Search } from '../search.model';
+import { NavigationService } from '../navigation.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopBarComponent implements OnInit {
 
-  constructor() { }
+  search = new Search('')
+
+  constructor(public navigationService: NavigationService) { }
 
   ngOnInit(): void {
+  }
+
+  searchTasks(object: any) {
+
+  }
+
+  changeView() {
+
   }
 
 }

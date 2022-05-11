@@ -127,7 +127,7 @@ export class NavigationService {
          break; 
       }
       case 5: {
-        /*// activate
+        // activate
         this.searchResults.next(true); 
         // deactivate  
         this.allTasks.next(false);
@@ -137,7 +137,7 @@ export class NavigationService {
         this.trashView.next(false);
         this.trashBar.next(false);
         // update current view
-         this.currentView = 5;*/
+         this.currentView = 5;
          break;              
       } 
    }
