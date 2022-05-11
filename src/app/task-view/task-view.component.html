@@ -5,13 +5,13 @@
         <div id="pinned" class="category">
             <div class="category-title">pinned</div>
             <div class="tasks-row">
-                <app-task-card *ngFor="let task of pinned" [taskTitle]="task.title" [pinnedStatus]="true" [description]="task.description"></app-task-card>
+                <app-task-card *ngFor="let task of pinned" [task]="task"></app-task-card>
             </div>
         </div>
         <div id="others" class="category">
             <div class="category-title">others</div>
             <div class="tasks-row">
-                <app-task-card *ngFor="let other of others" [taskTitle]="other.title" [pinnedStatus]="false" [description]="other.description"></app-task-card>
+                <app-task-card *ngFor="let other of others" [task]="other"></app-task-card>
             </div>
         </div>
     </div>

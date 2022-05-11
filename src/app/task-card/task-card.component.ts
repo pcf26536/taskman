@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalService } from '../modal.service';
+import { TasksService } from '../tasks.service';
+import { Node } from '../node.model';
+import { taskTypes } from 'src/shared/data';
 
 @Component({
   selector: 'app-task-card',
@@ -13,7 +16,9 @@ export class TaskCardComponent implements OnInit {
   @Input() pinnedStatus: boolean = false;
   @Input() description: string = '';
 
-  constructor(public modalService: ModalService) { }
+  @Input() task: Node = new Node(taskTypes.text);
+
+  constructor(public modalService: ModalService, public tasksService: TasksService) { }
 
   ngOnInit(): void {
   }

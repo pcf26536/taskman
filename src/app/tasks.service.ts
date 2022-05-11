@@ -34,13 +34,13 @@ export class TasksService {
     preloadedTasks.forEach(task => {
       // insert proloaded tasks into specific list
       if (task.pinned && !task.trashed) 
-      this.pinned.insertInBegin(task.type, task.title, task.edited, task.created, Date.now(), task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.done);
+      this.pinned.insertInBegin(task.type, task.title, task.edited, task.created, Date.now(), task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.trashed, task.done);
 
       if (!task.pinned && !task.trashed)
-      this.others.insertInBegin(task.type, task.title, task.edited, task.created, Date.now(), task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.done);
+      this.others.insertInBegin(task.type, task.title, task.edited, task.created, Date.now(), task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.trashed, task.done);
       
       if(task.trashed)
-      this.trash.insertInBegin(task.type, task.title, task.edited, task.created, Date.now(), task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.done);
+      this.trash.insertInBegin(task.type, task.title, task.edited, task.created, Date.now(), task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.trashed, task.done);
     });
 
     this.pinnedList.next(this.pinned);
@@ -49,21 +49,56 @@ export class TasksService {
    }
 
 
-   nextPinnedList(pinned: LinkedList) {
+  nextPinnedList(pinned: LinkedList) {
     this.pinnedList.next(pinned);
+  }
+
+  deleteTask(task: Node) {
+    
+    if (task.trashed) { // delete from trash list (permanently)
+      this.trash.deleteNode(task);
+      this.trashList.next(this.trash);
+      return; // no need to set trashed flag (end the funciton)
     }
 
-   addTask(task: Node) {
-    this.pinned.insertInBegin(task.type, task.title, task.edited, task.created, Date.now(), task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.done);
-    //this.pinnedList.next(this.pinned);
-    this.nextPinnedList(this.pinned);
-    //console.log(task.description);
-    //console.log(this.pinned.size());
-   }
+    if (task.pinned && !task.trashed) { // delete from pinned list
+      this.pinned.deleteNode(task);
+      this.pinnedList.next(this.pinned);
+    }
 
-   deleteTask() {
-     
-   }
+    if (!task.pinned && !task.trashed) { // delete from others list
+      this.others.deleteNode(task);
+      this.othersList.next(this.others)
+    }
 
+    // set trashed flag = true
+    task.trashed = true;
+    this.addTask(task);
+  }
+
+  addTask(task: Node) {
+    
+    if (task.trashed) { // insert to trash list
+    this.trash.insertInBegin(
+        task.type, task.title, task.edited, task.created, task.id, task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.trashed, task.done
+      );
+      this.trashList.next(this.trash);
+    }
+
+    if (task.pinned && !task.trashed) { // insert to pinned list
+      this.pinned.insertInBegin(
+        task.type, task.title, task.edited, task.created, task.id, task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.trashed, task.done
+      );
+      this.pinnedList.next(this.pinned);
+    }
+
+    if (!task.pinned && !task.trashed) { // insert to others list
+      this.others.insertInBegin(
+        task.type, task.title, task.edited, task.created, task.id, task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.trashed, task.done
+      );
+      this.othersList.next(this.others);
+    }
+
+  }
    
 }

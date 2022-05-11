@@ -10,9 +10,9 @@ export class LinkedList {
     public insertAtEnd(
         type: string, title: string, edited: number, created: number,
         id: number, description: string, complete: string[], incomplete: string[], 
-        reminder: number, pinned: boolean, done: boolean
+        reminder: number, pinned: boolean, trashed: boolean, done: boolean
         ): Node {
-        const node = new Node(type, title, edited, created, id, description, complete, incomplete, reminder, pinned, done);
+        const node = new Node(type, title, edited, created, id, description, complete, incomplete, reminder, pinned, trashed, done);
         if (!this.head) {
           this.head = node;
         } else {
@@ -30,24 +30,24 @@ export class LinkedList {
     
     public insertInBegin(type: string, title: string, edited: number, created: number,
         id: number, description: string, complete: string[], incomplete: string[], 
-        reminder: number, pinned: boolean, done: boolean): Node {
-        const node = new Node(type, title, edited, created, id, description, complete, incomplete, reminder, pinned, done);
+        reminder: number, pinned: boolean, trashed: boolean, done: boolean): Node {
+        const node = new Node(type, title, edited, created, id, description, complete, incomplete, reminder, pinned, trashed, done);
         if (!this.head) {
-        this.head = node;
+          this.head = node;
         } else {
-        this.head.prev = node;
-        node.next = this.head;
-        this.head = node;
+          this.head.prev = node;
+          node.next = this.head;
+          this.head = node;
         }
         return node;
     }
 
     public deleteNode(node: Node): void {
         if (!node.prev) {
-        this.head = node.next;
+          this.head = node.next;
         } else {
-        const prevNode = node.prev;
-        prevNode.next = node.next;
+          const prevNode = node.prev;
+          prevNode.next = node.next;
         }
     }
 

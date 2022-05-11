@@ -11,7 +11,7 @@ export class Node implements Task {
     pinned: boolean;
     edited: number;
     created: number;
-    //trashed: boolean;
+    trashed: boolean;
     done: boolean;
     next:Node|null;
     prev:Node|null;
@@ -23,7 +23,7 @@ export class Node implements Task {
         title: string = '', edited: number =  Date.now(), created: number =  Date.now(), id: number =  Date.now(), 
         description: string = '', complete: string[] = [], incomplete: string[] = [], 
         reminder: number = 0, 
-        pinned: boolean = false, done: boolean = false
+        pinned: boolean = false, trashed: boolean = false, done: boolean = false
         ) {
         // task attributes
         this.id = id;
@@ -36,7 +36,7 @@ export class Node implements Task {
         this.pinned = pinned;
         this.edited = edited;
         this.created = created;
-        //this.trashed = trashed;
+        this.trashed = trashed;
         this.done = done;
         // node attributes
         this.next = null;

@@ -24,6 +24,6 @@ export interface Task {
     pinned: boolean;
     edited: number;
     created: number;
-    //trashed: boolean;
+    trashed: boolean;
     done: boolean;
 }
