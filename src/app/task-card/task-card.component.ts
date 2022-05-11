@@ -29,8 +29,8 @@ export class TaskCardComponent implements OnInit {
 
   viewOrEditModal(task: Node) {
     this.tasksService.nextSelectedCard(task); // set selected task
-    //this.mode = task.trashed ? modalToggleStates.view : modalToggleStates.edit;
-    this.modalService.toggleModal(modalTypes.task, modalToggleStates.view); // show modal
+    this.mode = task.trashed ? modalToggleStates.view : modalToggleStates.edit;
+    this.modalService.toggleModal(modalTypes.task, this.mode); // show modal
   }
 
 }
