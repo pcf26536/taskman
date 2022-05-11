@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { preloadedTasks } from 'src/shared/data';
+import { modalToggleStates, preloadedTasks } from 'src/shared/data';
 import { LinkedList } from './linked-list.model';
 import { BehaviorSubject } from "rxjs";
 import { Node } from './node.model';
+import { taskTypes } from 'src/shared/data';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class TasksService {
   constructor() {
     this.preloadTasks();
    }
-
+  /* observable functions */
    public pinnedList = new BehaviorSubject(new LinkedList());
    sharedPinnedList = this.pinnedList.asObservable();
 
@@ -30,6 +31,31 @@ export class TasksService {
    public trashList = new BehaviorSubject(new LinkedList());
    sharedTrashList = this.trashList.asObservable();
 
+  // selected card/node
+  private selectedCard = new BehaviorSubject(new Node(''));
+  sharedSelectedCard = this.selectedCard.asObservable();
+
+  nextSelectedCard(selectedCard: Node) {
+    this.selectedCard.next(selectedCard);
+  }
+
+   // task type update
+   private selectedTaskType = new BehaviorSubject(taskTypes.text);
+   sharedSelectedType = this.selectedTaskType.asObservable()
+
+  nextSelectedTaskType(selectedType: string) {
+    this.selectedTaskType.next(selectedType);
+  }
+
+  // task modal mode
+  private taskModalMode = new BehaviorSubject(modalToggleStates.create);
+  sharedTaskModalMode = this.taskModalMode.asObservable()
+
+  nextTaskModalMode(taskModalMode: string) {
+    this.taskModalMode.next(taskModalMode);
+  }
+
+    /* service functions */
    preloadTasks() {
     preloadedTasks.forEach(task => {
       // insert proloaded tasks into specific list
@@ -47,11 +73,6 @@ export class TasksService {
     this.othersList.next(this.others);
     this.trashList.next(this.trash);
    }
-
-
-  nextPinnedList(pinned: LinkedList) {
-    this.pinnedList.next(pinned);
-  }
 
   deleteTask(task: Node) {
     

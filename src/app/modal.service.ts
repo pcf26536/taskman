@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs";
 import { taskTypes } from 'src/shared/data';
+import { modalToggleStates } from 'src/shared/data';
+import { modalTypes } from 'src/shared/data';
+import { TasksService } from './tasks.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +17,7 @@ export class ModalService {
   private reminderModal = new BehaviorSubject(false);
   sharedReminderModal = this.reminderModal.asObservable();
 
-  // task type update
-  private selectedType = new BehaviorSubject(taskTypes.text);
-  sharedSelectedType = this.selectedType.asObservable();
-
-  constructor() { }
+  constructor(private tasksService: TasksService) { }
 
   // next modal states
   nextTaskModalState(taskModal: boolean) {
@@ -29,13 +28,7 @@ export class ModalService {
     this.reminderModal.next(reminderModal);
   }
 
-  // selected task type
-  nextSelectedType(selectedType: string) {
-    this.selectedType.next(selectedType);
-  }
-
-
-  toggleModal(mode: number) {
+  toggleModal(modalType: string, toggeState: string = modalToggleStates.close, taskType: string = taskTypes.text) {
     /* MODES
     1: Text Task Modal (Create)
     2: List Task Modal (Create)
@@ -44,8 +37,68 @@ export class ModalService {
     5: Text Task Modal (Edit/view)
     6: List Task Modal (Edit/view)
     7: Close All*/
+    switch(modalType) {
 
-    switch(mode) {
+      case modalTypes.reminder: { // reminder modal
+        switch(toggeState) {
+          case modalToggleStates.create : {
+            this.reminderModal.next(true);
+            break;
+          }
+          case modalToggleStates.edit : {
+            this.reminderModal.next(true);
+            break;
+          }
+          case modalToggleStates.close : {
+            this.reminderModal.next(false);
+            break;
+          }
+        }
+
+        break;
+      }
+
+      case modalTypes.task: { // task modal
+        switch(toggeState) {
+          case modalToggleStates.create : {
+            this.taskModal.next(true);
+            // text or list task type from trigger
+            this.tasksService.nextSelectedTaskType(taskType);
+            this.tasksService.nextTaskModalMode(modalToggleStates.create);
+            break;
+          }
+          case modalToggleStates.edit : {
+            this.taskModal.next(true);
+            // the task type is known from Node: type attribute
+            this.tasksService.nextTaskModalMode(modalToggleStates.edit);
+            break;
+          }
+          case modalToggleStates.view : {
+            this.taskModal.next(true);
+            // the task type is known from Node: type attribute
+            this.tasksService.nextTaskModalMode(modalToggleStates.view);
+            break;
+          }
+          // case view (trash) ???
+          case modalToggleStates.close : {
+            this.taskModal.next(false);
+            this.reminderModal.next(false);
+            break;
+          }
+        }
+
+        break;
+      }
+
+      case modalTypes.all: { // close all modals
+        this.taskModal.next(false);
+        this.reminderModal.next(false);
+        break;
+      }
+    }
+
+
+    /*switch(mode) {
       case 5: {
         this.taskModal.next(true);
         // pass task values
@@ -86,7 +139,7 @@ export class ModalService {
         this.reminderModal.next(false);
         break;
       }
-    }
+    }*/
   }
 
 }

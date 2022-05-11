@@ -72,3 +72,8 @@ export const preloadedTasks = [
   complete: [mock1, mock1, mock1, mock1], incomplete: [mock1, mock1, mock1, mock1], 
   reminder: 0, pinned: false, edited: nowTimestamp - (35 * minutesMultiplier), created: nowTimestamp - (35 * minutesMultiplier), trashed: true, done: false },
 ]
+
+// modal toggle states
+export const modalToggleStates = {create: 'create', edit: 'edit', view: 'view', close: 'close'};
+
+export const modalTypes = {reminder: 'reminder', task: 'task', all: 'all'};

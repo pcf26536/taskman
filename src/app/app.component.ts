@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NavigationService } from './navigation.service';
 import { ModalService } from './modal.service';
+import { TasksService } from './tasks.service';
 import { taskTypes } from 'src/shared/data';
+import { Node } from './node.model';
 
 @Component({
   selector: 'app-root',
@@ -19,13 +21,20 @@ export class AppComponent {
   searchResults: boolean = false;
   createTaskField: boolean = true;
   trashBar: boolean = false;
+  
   // modal types
   taskModal: boolean = false;
   reminderModal: boolean = false;
-  // task type
-  selectedType: string = taskTypes.text;
+  
+  // selected task type (create)
+  selectedTaskType: string = taskTypes.text;
 
-  constructor(private navigationService: NavigationService, private modalService: ModalService) {
+  // selected task
+  selectedTask = new Node('');
+  
+
+  constructor(private navigationService: NavigationService, private modalService: ModalService,
+              private tasksService: TasksService) {
   }
 
   ngOnInit(): void {
@@ -40,8 +49,10 @@ export class AppComponent {
     // modal types
     this.modalService.sharedTaskModal.subscribe(status=> this.taskModal = status);
     this.modalService.sharedReminderModal.subscribe(status=> this.reminderModal = status);
-    // task type
-    this.modalService.sharedSelectedType.subscribe(value=> this.selectedType = value);
+    // task type (create)
+    this.tasksService.sharedSelectedType.subscribe(value=> this.selectedTaskType = value);
+    // selected task/card (view/edit)
+    this.tasksService.sharedSelectedCard.subscribe(value=> this.selectedTask = value);
   }
 
 }

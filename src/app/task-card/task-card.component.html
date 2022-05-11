@@ -1,4 +1,4 @@
-<div id="task-card" class="task" (click)="this.modalService.toggleModal(1)">
+<div id="task-card" class="task" (click)="viewOrEditModal(task)">
     <div class="title-row">
         <div class="task-title">{{ task.title }}</div>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="icon-button" *ngIf="!task.pinned && !task.trashed">
