@@ -2,26 +2,21 @@
     <div class="category">
         <div id="today-header">
             <button>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                     <path d="M3.86002 8.75301L9.34202 13.549C9.98802 14.115 11 13.655 11 12.796V3.20401C11.0002 3.01177 10.9449 2.82355 10.8409 2.6619C10.7368 2.50025 10.5884 2.37202 10.4133 2.29256C10.2383 2.21311 10.044 2.1858 9.85385 2.2139C9.66367 2.242 9.48562 2.32432 9.34102 2.45101L3.86102 7.24701C3.75361 7.34088 3.66753 7.45663 3.60854 7.5865C3.54956 7.71638 3.51904 7.85737 3.51904 8.00001C3.51904 8.14266 3.54956 8.28365 3.60854 8.41352C3.66753 8.5434 3.75361 8.65915 3.86102 8.75301H3.86002Z" fill="#999999"/>
                 </svg>                    
                 Prev
             </button>
-            Friday, 15th April 2022
+            {{ todayString }}
             <button>
                 Next
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                     <path d="M12.14 8.75301L6.658 13.549C6.012 14.115 5 13.655 5 12.796V3.20401C4.99984 3.01177 5.05509 2.82355 5.15914 2.6619C5.26319 2.50025 5.41164 2.37202 5.58669 2.29256C5.76175 2.21311 5.956 2.1858 6.14618 2.2139C6.33636 2.242 6.51441 2.32432 6.659 2.45101L12.139 7.24701C12.2464 7.34088 12.3325 7.45663 12.3915 7.5865C12.4505 7.71638 12.481 7.85737 12.481 8.00001C12.481 8.14266 12.4505 8.28365 12.3915 8.41352C12.3325 8.5434 12.2464 8.65915 12.139 8.75301H12.14Z" fill="#999999"/>
                 </svg>
             </button>
         </div>
         <div class="tasks-row">
-            <app-task-card></app-task-card>
-            <app-task-card></app-task-card>
-            <app-task-card></app-task-card>
-            <app-task-card></app-task-card>
-            <app-task-card></app-task-card>
-            <app-task-card></app-task-card>
+            <app-task-card *ngFor="let task of today" [task]="task"></app-task-card>
         </div>
     </div>
 </div>

@@ -101,15 +101,17 @@ export class NavigationService {
          break; 
       } 
       case 3: {
-        /*this.allTasks.next(false);
+        // activate/show
         this.createTaskField.next(true);
-        this.todayView.next(true);
-        this.calenderView.next(false);
+        this.calenderView.next(true);
+        // deactive/hide
+        this.allTasks.next(false);
+        this.todayView.next(false);
         this.trashView.next(false);
         this.trashBar.next(false);
         this.searchResults.next(false);
         // update current view
-         this.currentView = 3;*/
+         this.currentView = 3;
          break;    
       } 
       case 4: {

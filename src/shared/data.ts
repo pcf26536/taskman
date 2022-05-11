@@ -43,7 +43,7 @@ export const preloadedTasks = [
   // others - check pinned flag
   { type: taskTypes.list, title: '', description: '', 
   complete: [mock1, mock1, mock1, mock1], incomplete: [mock1, mock1, mock1, mock1], 
-  reminder: 0, pinned: false, edited: nowTimestamp - (15 * minutesMultiplier), created: nowTimestamp - (15 * minutesMultiplier), trashed: false, done: false },
+  reminder: nowTimestamp + 80000000, pinned: false, edited: nowTimestamp - (15 * minutesMultiplier), created: nowTimestamp - (15 * minutesMultiplier), trashed: false, done: false },
 
   { type: taskTypes.text, title: 'Task Title', description: loremIpsum, 
   complete: [], incomplete: [], 

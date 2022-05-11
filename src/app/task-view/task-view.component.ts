@@ -25,6 +25,8 @@ export class TaskViewComponent implements OnInit {
   others: Node[] = [];
   trashTasks: LinkedList = new LinkedList();
   trash: Node[] = [];
+  // today tasks
+  all: Node[] = [];
 
   constructor(private tasksService: TasksService) {  
   }
@@ -33,10 +35,12 @@ export class TaskViewComponent implements OnInit {
     this.tasksService.sharedPinnedList.subscribe(list => {
       this.pinnedTasks = list;
       this.pinned = this.pinnedTasks.traverse();
+      this.all = [...this.pinned, ...this.others];
     });
     this.tasksService.sharedOthersList.subscribe(list => {
       this.othersTasks = list;
       this.others = this.othersTasks.traverse();
+      this.all = [...this.pinned, ...this.others];
     });
     this.tasksService.sharedTrashList.subscribe(list => {
       this.trashTasks = list;

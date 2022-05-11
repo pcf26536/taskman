@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    <app-today-view *ngIf="todayView"></app-today-view>
+    <app-today-view *ngIf="todayView" [all]="all"></app-today-view>
     <app-trash-view *ngIf="trashView" [trash]="trash"></app-trash-view>
     <div id="search-results" class="tasks-row" *ngIf="searchResults">
     </div>
