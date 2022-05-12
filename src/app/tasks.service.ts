@@ -97,6 +97,30 @@ export class TasksService {
     this.addTask(task);
   }
 
+  // restore task logic
+  restoreTask(task: Node) {
+    // delete from trashed list
+    this.trash.deleteNode(task);
+    this.trashList.next(this.trash);
+    // set trashed flag = false
+    task.trashed = false;
+    
+    if (task.pinned) { // add to pinned list
+      this.pinned.insertInBegin(
+        task.type, task.title, task.edited, task.created, task.id, task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.trashed, task.done
+      );
+      this.pinnedList.next(this.pinned);
+    }
+
+    if (!task.pinned) { // add to others list
+      this.others.insertInBegin(
+        task.type, task.title, task.edited, task.created, task.id, task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.trashed, task.done
+      );
+      this.othersList.next(this.others)
+    }
+    
+  }
+
   addTask(task: Node) {
     
     if (task.trashed) { // insert to trash list
