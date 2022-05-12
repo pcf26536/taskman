@@ -77,22 +77,52 @@ export class TasksService {
     this.trashList.next(this.trash);
    }
 
+
+   // live task management functions
+   deleteFromPinnedList(task: Node) {
+    this.pinned.deleteNode(task);
+    this.pinnedList.next(this.pinned);
+   }
+
+   deleteFromOthersList(task: Node) {
+    this.others.deleteNode(task);
+    this.othersList.next(this.others)
+   }
+
+   deleteFromTrashList(task: Node) {
+    this.trash.deleteNode(task);
+    this.trashList.next(this.trash);
+   }
+
+   addToPinnedList(task: Node) {
+    this.pinned.insertInBegin(
+      task.type, task.title, task.edited, task.created, task.id, task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.trashed, task.done
+    );
+    this.pinnedList.next(this.pinned);
+   }
+
+   addToOthersList(task: Node) {
+    this.others.insertInBegin(
+      task.type, task.title, task.edited, task.created, task.id, task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.trashed, task.done
+    );
+    this.othersList.next(this.others);
+   }
+   // live task management functions
+
+
   deleteTask(task: Node) {
     
     if (task.trashed) { // delete from trash list (permanently)
-      this.trash.deleteNode(task);
-      this.trashList.next(this.trash);
+      this.deleteFromTrashList(task);
       return; // no need to set trashed flag (end the funciton)
     }
 
     if (task.pinned && !task.trashed) { // delete from pinned list
-      this.pinned.deleteNode(task);
-      this.pinnedList.next(this.pinned);
+      this.deleteFromPinnedList(task);
     }
 
     if (!task.pinned && !task.trashed) { // delete from others list
-      this.others.deleteNode(task);
-      this.othersList.next(this.others)
+      this.deleteFromOthersList(task);
     }
 
     // set trashed flag = true
@@ -106,23 +136,16 @@ export class TasksService {
   // restore task logic
   restoreTask(task: Node) {
     // delete from trashed list
-    this.trash.deleteNode(task);
-    this.trashList.next(this.trash);
+    this.deleteFromTrashList(task);
     // set trashed flag = false
     task.trashed = false;
     
     if (task.pinned) { // add to pinned list
-      this.pinned.insertInBegin(
-        task.type, task.title, task.edited, task.created, task.id, task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.trashed, task.done
-      );
-      this.pinnedList.next(this.pinned);
+      this.addToPinnedList(task);
     }
 
     if (!task.pinned) { // add to others list
-      this.others.insertInBegin(
-        task.type, task.title, task.edited, task.created, task.id, task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.trashed, task.done
-      );
-      this.othersList.next(this.others)
+      this.addToOthersList(task);
     }
 
     // show notification
@@ -139,19 +162,32 @@ export class TasksService {
     }
 
     if (task.pinned && !task.trashed) { // insert to pinned list
-      this.pinned.insertInBegin(
-        task.type, task.title, task.edited, task.created, task.id, task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.trashed, task.done
-      );
-      this.pinnedList.next(this.pinned);
+      this.addToPinnedList(task);
     }
 
     if (!task.pinned && !task.trashed) { // insert to others list
-      this.others.insertInBegin(
-        task.type, task.title, task.edited, task.created, task.id, task.description, task.complete, task.incomplete, task.reminder, task.pinned, task.trashed, task.done
-      );
-      this.othersList.next(this.others);
+      this.addToOthersList(task);
     }
 
+  }
+
+  pinToggle(task: Node) {
+    if (task.pinned) {
+      // remove from pinned list
+      this.deleteFromPinnedList(task);
+      // task.pinned = false;
+      task.pinned = false;
+      // add to others list
+      this.addToOthersList(task);
+    }
+    else {
+      // remove from others list
+      this.deleteFromOthersList(task);
+      // task.pinned = true;
+      task.pinned = true;
+      // add to pinned list
+      this.addToPinnedList(task);
+    }
   }
    
 }
