@@ -1,0 +1,13 @@
+<div id="calender-view">
+    <div id="header-row">
+        <div>{{ calendarService.longMonthName }}</div>
+        <div>{{ calendarService.currentYear }}</div>
+    </div>
+    <div id="days-row">
+        <div *ngFor="let day of calendarService.shorWeekDays">
+            {{ day }}
+        </div>
+    </div>
+    <div id="dates-grid">
+    </div>
+</div>
