@@ -5,6 +5,7 @@ import { Node } from 'src/shared/node.model';
 import { taskTypes } from 'src/shared/data';
 import { modalToggleStates } from 'src/shared/data';
 import { modalTypes } from 'src/shared/data';
+import { CalendarService } from 'src/shared/calendar.service';
 
 @Component({
   selector: 'app-task-card',
@@ -22,7 +23,8 @@ export class TaskCardComponent implements OnInit {
 
   mode: any = modalToggleStates.edit;
 
-  constructor(public modalService: ModalService, public tasksService: TasksService) { }
+  constructor(public modalService: ModalService, public tasksService: TasksService,
+    public calendarService: CalendarService) { }
 
   ngOnInit(): void {
   }
@@ -31,6 +33,10 @@ export class TaskCardComponent implements OnInit {
     this.tasksService.nextSelectedCard(task); // set selected task
     this.mode = task.trashed ? modalToggleStates.view : modalToggleStates.edit;
     this.modalService.toggleModal(modalTypes.task, this.mode); // show modal
+  }
+
+  reminderPassed(reminder: number) {
+    return Date.now() > reminder;
   }
 
 }

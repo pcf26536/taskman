@@ -5,6 +5,7 @@ import { taskTypes } from 'src/shared/data';
 import { TasksService } from '../../shared/tasks.service';
 import { modalTypes } from 'src/shared/data';
 import { modalToggleStates } from 'src/shared/data';
+import { CalendarService } from 'src/shared/calendar.service';
 
 @Component({
   selector: 'app-task-modal',
@@ -26,7 +27,8 @@ export class TaskModalComponent implements OnInit {
 
   editMode: string = modalToggleStates.create;
 
-  constructor(public modalService: ModalService, public tasksService: TasksService) { }
+  constructor(public modalService: ModalService, public tasksService: TasksService, 
+    public calendarService: CalendarService) { }
 
   ngOnInit(): void {
     // selected task/card (view/edit)

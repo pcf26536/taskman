@@ -15,7 +15,13 @@ export class CalendarService {
   public currentDate = this.dateObject.getDate();
 
   // today view
-  public dateString = this.dateObject.toLocaleDateString(locale, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  public todayDateString = this.dateObject.toLocaleDateString(locale, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+  // reminder date string format
+  reminderDateTimeString(reminder: number) {
+    let date = new Date(reminder);
+    return date.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' }) + ', ' + date.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' });
+  }
 
   constructor() { }
 
