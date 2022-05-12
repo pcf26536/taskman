@@ -3,7 +3,7 @@ import { BehaviorSubject } from "rxjs";
 import { taskTypes } from 'src/shared/data';
 import { modalToggleStates } from 'src/shared/data';
 import { modalTypes } from 'src/shared/data';
-import { TasksService } from './tasks.service';
+import { TasksService } from '../shared/tasks.service';
 
 @Injectable({
   providedIn: 'root'

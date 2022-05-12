@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TasksService } from '../tasks.service';
-import { LinkedList } from '../linked-list.model';
-import { Node } from '../node.model';
+import { TasksService } from '../../shared/tasks.service';
+import { LinkedList } from 'src/shared/linked-list.model';
+import { Node } from 'src/shared/node.model';
 
 @Component({
   selector: 'app-task-view',

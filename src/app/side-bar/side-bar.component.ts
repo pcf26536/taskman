@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NavigationService } from '../navigation.service';
+import { NavigationService } from 'src/shared/navigation.service';
 
 @Component({
   selector: 'app-side-bar',

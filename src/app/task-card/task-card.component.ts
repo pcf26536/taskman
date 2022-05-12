@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalService } from '../modal.service';
-import { TasksService } from '../tasks.service';
-import { Node } from '../node.model';
+import { ModalService } from 'src/shared/modal.service';
+import { TasksService } from '../../shared/tasks.service';
+import { Node } from 'src/shared/node.model';
 import { taskTypes } from 'src/shared/data';
 import { modalToggleStates } from 'src/shared/data';
 import { modalTypes } from 'src/shared/data';

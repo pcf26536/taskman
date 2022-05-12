@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { NavigationService } from './navigation.service';
-import { ModalService } from './modal.service';
-import { TasksService } from './tasks.service';
+import { NavigationService } from 'src/shared/navigation.service';
+import { ModalService } from 'src/shared/modal.service';
+import { TasksService } from '../shared/tasks.service';
 import { taskTypes } from 'src/shared/data';
-import { Node } from './node.model';
+import { Node } from 'src/shared/node.model';
 
 @Component({
   selector: 'app-root',

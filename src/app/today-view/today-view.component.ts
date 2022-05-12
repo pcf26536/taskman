@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Node } from '../node.model';
+import { Node } from 'src/shared/node.model';
 
 @Component({
   selector: 'app-today-view',
