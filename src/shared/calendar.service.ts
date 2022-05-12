@@ -15,7 +15,6 @@ export class CalendarService {
   public currentDate = this.dateObject.getDate();
 
   // today view
-
   public dateString = this.dateObject.toLocaleDateString(locale, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
   constructor() { }

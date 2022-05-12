@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Node } from 'src/shared/node.model';
+import { CalendarService } from 'src/shared/calendar.service';
 
 @Component({
   selector: 'app-today-view',
@@ -11,19 +12,17 @@ export class TodayViewComponent implements OnInit {
 
   today: Node[] = []
 
-  constructor() { }
+  constructor(public calendarService: CalendarService) { }
 
   ngOnInit(): void {
     this.today = [];
     this.all.forEach(task => {
-      if (new Date(task.reminder).getDay() == new Date().getDay()) {
-        this.today.push(task);
+      if(task.reminder) {
+        if (new Date(task.reminder).getDay() == new Date().getDay()) {
+          this.today.push(task);
+        }
       }
     });
   }
-
-  // Friday, 15 April 2022
-  date = new Date();
-  todayString = "" + this.date.getDay() + ", " + this.date.getDate() + " " + this.date.getMonth() + " " + this.date.getFullYear();
 
 }
