@@ -4,6 +4,8 @@ import { LinkedList } from './linked-list.model';
 import { BehaviorSubject } from "rxjs";
 import { Node } from './node.model';
 import { taskTypes } from 'src/shared/data';
+import { NotificationService } from 'src/shared/notification.service';
+import { notificationTypes } from 'src/shared/data';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +20,10 @@ export class TasksService {
   // 1. Trash
   trash = new LinkedList();
 
-  constructor() {
+  constructor(private notificationService: NotificationService) {
     this.preloadTasks();
    }
+
   /* observable functions */
    public pinnedList = new BehaviorSubject(new LinkedList());
    sharedPinnedList = this.pinnedList.asObservable();
@@ -95,6 +98,9 @@ export class TasksService {
     // set trashed flag = true
     task.trashed = true;
     this.addTask(task);
+
+    // show notification
+    this.notificationService.showNotification(notificationTypes.deleteTask);
   }
 
   // restore task logic
@@ -118,7 +124,9 @@ export class TasksService {
       );
       this.othersList.next(this.others)
     }
-    
+
+    // show notification
+    this.notificationService.showNotification(notificationTypes.restoreTask);
   }
 
   addTask(task: Node) {

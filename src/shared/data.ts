@@ -79,3 +79,5 @@ export const modalToggleStates = {create: 'create', edit: 'edit', view: 'view', 
 export const modalTypes = {reminder: 'reminder', task: 'task', all: 'all'};
 
 export const locale = 'en-GB';
+
+export const notificationTypes = {deleteReminder: 'delr', deleteTask: 'delt', restoreTask: 'rest', undo: 'undo'};
