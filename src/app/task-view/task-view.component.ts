@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { TasksService } from '../../shared/tasks.service';
 import { LinkedList } from 'src/shared/linked-list.model';
 import { Node } from 'src/shared/node.model';
+import { debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-task-view',
@@ -27,6 +28,16 @@ export class TaskViewComponent implements OnInit {
   trash: Node[] = [];
   // today tasks
   all: Node[] = [];
+
+  private carsQuery$ = this.tasksService.carsQuerySubject.pipe(
+    debounceTime(250),
+    distinctUntilChanged(),
+    startWith('')
+  );
+
+  readonly matches$ = this.carsQuery$.pipe(
+    switchMap(query => this.tasksService.loadMatches(query))
+  );
 
   constructor(private tasksService: TasksService) {  
   }

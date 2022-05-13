@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { modalToggleStates, preloadedTasks } from 'src/shared/data';
 import { LinkedList } from './linked-list.model';
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable, asapScheduler, scheduled, of , Subject} from "rxjs";
 import { Node } from './node.model';
 import { taskTypes } from 'src/shared/data';
 import { NotificationService } from 'src/shared/notification.service';
 import { notificationTypes } from 'src/shared/data';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -188,6 +189,15 @@ export class TasksService {
       // add to pinned list
       this.addToPinnedList(task);
     }
+  }
+
+  public carsQuerySubject = new Subject<string>();
+
+  loadMatches(query: string): Observable<Node[]> {
+    let all = [...this.pinned.traverse(), ...this.others.traverse()];
+    return of(all, asapScheduler).pipe(
+      map(all => all.filter(task => task.description.includes(query)))
+    );
   }
    
 }
