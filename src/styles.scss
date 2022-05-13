@@ -76,6 +76,7 @@ body {
 }
 
 .reminder-label:hover {
+    cursor: pointer;
     
     .clear-reminder {
         display: block;
@@ -164,4 +165,12 @@ input:focus, textarea:focus {
     display: grid;
     grid-template-columns: repeat(4, auto);
     gap: 20px;
+}
+
+.modal {
+    transform: translate(-50%, -50%);
+    -webkit-font-smoothing: antialiased;
+    background-color: #ffffff;
+    filter: drop-shadow(-2px -2px 3px rgba(102, 102, 102, 0.25)) drop-shadow(2px 2px 3px rgba(102, 102, 102, 0.25));
+    position: fixed;
 }

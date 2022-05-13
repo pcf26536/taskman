@@ -6,6 +6,8 @@ import { TasksService } from '../../shared/tasks.service';
 import { modalTypes } from 'src/shared/data';
 import { modalToggleStates } from 'src/shared/data';
 import { CalendarService } from 'src/shared/calendar.service';
+import { ReminderService } from 'src/shared/reminder.service';
+import { NotificationService } from 'src/shared/notification.service';
 
 @Component({
   selector: 'app-task-modal',
@@ -28,7 +30,8 @@ export class TaskModalComponent implements OnInit {
   editMode: string = modalToggleStates.create;
 
   constructor(public modalService: ModalService, public tasksService: TasksService, 
-    public calendarService: CalendarService) { }
+    public calendarService: CalendarService, public reminderService: ReminderService,
+    private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     // selected task/card (view/edit)
@@ -46,13 +49,72 @@ export class TaskModalComponent implements OnInit {
     // close modal
     this.modalService.toggleModal(modalTypes.all);
 
-    if ( // if input/task values have changed
+    if ( // if input/task values have changed (expand the values)
       this.taskModel.title != this.changeModel.title || 
-      this.taskModel.description != this.changeModel.description
+      this.taskModel.description != this.changeModel.description ||
+      this.taskModel.pinned != this.changeModel.pinned ||
+      this.taskModel.reminder != this.changeModel.reminder
     ) {
       this.tasksService.addTask(this.taskModel);
     }
     
+  }
+
+  toggleReminderModal() {
+    let toggleState: string = modalToggleStates.create;
+    if (
+      (this.editMode == modalToggleStates.create && !this.changeModel.reminder) || 
+    (this.editMode == modalToggleStates.edit && !this.selectedTask.reminder)
+    ) {
+      toggleState = modalToggleStates.create;
+    }
+    else if (
+      (this.editMode == modalToggleStates.create && this.changeModel.reminder) || 
+    (this.editMode == modalToggleStates.edit && this.selectedTask.reminder)
+    ) {
+      toggleState = modalToggleStates.edit;
+    }
+    this.modalService.toggleModal(modalTypes.reminder, toggleState);
+  }
+
+  updateReminder(dateTime: string) {
+    let value = this.reminderService.reminderInMilliseconds(dateTime);
+    if (this.editMode == modalToggleStates.create) {
+      this.taskModel.reminder = value;
+    }
+    else { // (this.editMode == modalToggleStates.edit)
+      this.selectedTask.reminder = value;
+    }
+  }
+
+  deleteFromModal() {
+    // close modal
+    this.modalService.toggleModal(modalTypes.all);
+
+    /*if ( // if input/task values have changed (NEEED TO expand the values)
+      this.taskModel.title != this.changeModel.title || 
+      this.taskModel.description != this.changeModel.description ||
+      this.taskModel.pinned != this.changeModel.pinned ||
+      this.taskModel.reminder != this.changeModel.reminder
+    ) {
+      this.tasksService.addTask(this.taskModel); // save the task and
+      this.tasksService.deleteTask(this.taskModel); // delete the new task
+    }
+    // delete selected task
+    if (this.selectedTask.title || this.selectedTask.description || this.selectedTask.reminder ) {
+      this.tasksService.deleteTask(this.selectedTask);
+    }*/
+
+  }
+
+  deleteReminder() {
+    if (this.editMode == modalToggleStates.create) {
+      this.taskModel.reminder = 0;
+    }
+    else { // (this.editMode == modalToggleStates.edit)
+      this.selectedTask.reminder = 0;
+    }
+    this.notificationService.showReminderDeleteNotification();
   }
 
 }

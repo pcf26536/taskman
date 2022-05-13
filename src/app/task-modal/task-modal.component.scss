@@ -1,13 +1,8 @@
 #task-modal {
     width: 583px;
-    position: fixed;
     top: 45%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    -webkit-font-smoothing: antialiased;
-    background-color: #ffffff;
     z-index: 20;
-    filter: drop-shadow(-2px -2px 3px rgba(102, 102, 102, 0.25)) drop-shadow(2px 2px 3px rgba(102, 102, 102, 0.25));
     display: grid;
     grid-template-rows: auto;
     row-gap: 20px;

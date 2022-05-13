@@ -97,49 +97,6 @@ export class ModalService {
       }
     }
 
-
-    /*switch(mode) {
-      case 5: {
-        this.taskModal.next(true);
-        // pass task values
-        // activate description div
-        this.selectedType.next(taskTypes.text);
-        break;
-      }
-      case 1: {
-        this.taskModal.next(true);
-        // activate description div
-        this.selectedType.next(taskTypes.text);
-        break;
-      }
-      case 4: {
-        this.reminderModal.next(true);
-        // pass reminder values
-        break;
-      }
-      case 3: {
-        this.reminderModal.next(true);
-        break;
-      }
-      case 6: {
-        this.taskModal.next(true);
-        // pass list item values
-        // activate list items div
-        this.selectedType.next(taskTypes.list);
-        break;
-      }
-      case 2: {
-        this.taskModal.next(true);
-        // activate list items div
-        this.selectedType.next(taskTypes.list);
-        break;
-      }
-      case 7: {
-        this.taskModal.next(false);
-        this.reminderModal.next(false);
-        break;
-      }
-    }*/
   }
 
 }

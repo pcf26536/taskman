@@ -55,5 +55,10 @@ export class NotificationService {
       this.hideNotification();
     }
 
+    showReminderDeleteNotification() {
+      // show notification
+      this.showNotification(notificationTypes.deleteReminder);
+    }
+
   constructor() { }
 }

@@ -1,6 +1,8 @@
-<div id="reminder-modal" *ngIf="reminderModal">
-    <div>Pick date & time:</div>
-    <input type="date" name="reminder-date" id="reminder-date">
-    <input type="time" name="reminder-time" id="reminder-time">
-    <button type="submit">Save</button>
-</div>
+<form (ngSubmit)="addReminder()" novalidate #reminderForm="ngForm">
+    <div id="reminder-modal" class="modal" *ngIf="reminderModal">
+        <div>Pick date & time:</div>
+        <input type="date" name="reminder-date" id="reminder-date" [(ngModel)]="reminderModel.date">
+        <input type="time" name="reminder-time" id="reminder-time" [(ngModel)]="reminderModel.time">
+        <button type="submit">Save</button>
+    </div>
+</form>
