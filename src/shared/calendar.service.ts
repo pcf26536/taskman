@@ -23,6 +23,10 @@ export class CalendarService {
     return date.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' }) + ', ' + date.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' });
   }
 
+  reminderPassed(reminder: number) {
+    return Date.now() > reminder;
+  }
+
   constructor() { }
 
   // calender view

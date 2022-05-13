@@ -35,8 +35,4 @@ export class TaskCardComponent implements OnInit {
     this.modalService.toggleModal(modalTypes.task, this.mode); // show modal
   }
 
-  reminderPassed(reminder: number) {
-    return Date.now() > reminder;
-  }
-
 }

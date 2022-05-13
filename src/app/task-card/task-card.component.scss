@@ -31,15 +31,10 @@
     align-items: center;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 20px;
-}
-
-.reminder-label {
     width: fit-content;
 }
 
-.action-buttons {
-    width: 15%;
-    grid-template-columns: repeat(2, 1fr);
+.reminder-label {
     width: fit-content;
 }
 
