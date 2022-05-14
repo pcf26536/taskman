@@ -172,4 +172,13 @@ export class TaskModalComponent implements OnInit {
     event.prevent.preventDefault();
   }
 
+  removeItem(index: number) {
+    if (this.editMode == modalToggleStates.create) {
+      this.taskModel.complete.splice(index, 1);
+    }
+    else { // or edit (view)
+      this.selectedTask.complete.splice(index, 1);
+    }
+  }
+
 }
