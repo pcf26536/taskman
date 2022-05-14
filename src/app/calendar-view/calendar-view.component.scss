@@ -1,0 +1,78 @@
+#calendar-view {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+%flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  
+}
+
+#header-row {
+    @extend %flex;
+    padding: 0 1em 1em;
+    
+    #month {
+        color: #F29900;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    #year {
+    font-weight: 600;
+    }
+}
+
+#days-row {
+    color: #999999;
+}
+
+.cells {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.dates {
+    // correct task preview overflow
+    height: 9vh;
+    width: 10vw;
+    background-color: #ffffff;
+}
+
+#dates-grid {
+    border: 1px solid rgba(102, 102, 102, 0.25);
+    background-color: rgba(102, 102, 102, 0.25);
+    gap: 1px;
+}
+
+.cell {
+    padding: .5em;
+}
+
+.not-current {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.today {
+    color: #F29900;
+    font-weight: 700;
+
+    .task-preview {
+        background-color: #F29900;
+    }
+}
+
+.task-preview {
+    color: #ffffff;
+    @extend %flex;
+    width: 8vw;
+    font-weight: 300;
+    font-size: 11px;
+    background-color: #C4C4C4;
+    padding: 2px 4px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+

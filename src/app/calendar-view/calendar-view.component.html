@@ -1,13 +1,22 @@
-<div id="calender-view">
+<div id="calendar-view">
     <div id="header-row">
-        <div>{{ calendarService.longMonthName }}</div>
-        <div>{{ calendarService.currentYear }}</div>
+        <div id="month">{{ calendarService.longMonthName }}</div>
+        <div id="year">{{ calendarService.currentYear }}</div>
     </div>
-    <div id="days-row">
-        <div *ngFor="let day of calendarService.shorWeekDays">
+    <div id="days-row" class="cells">
+        <div *ngFor="let day of calendarService.shorWeekDays" class="cell">
             {{ day }}
         </div>
     </div>
-    <div id="dates-grid">
+    <div id="dates-grid" class="cells">
+        <div *ngFor="let day of calendarService.days" class="cell dates" [class.not-current]="!day.isCurrentMonth" [class.today]="calendarService.currentDate == day.dayOfMonth">
+            {{ day.dayOfMonth }}
+            <ng-container *ngFor="let task of reminder" >
+                <div *ngIf="dateMatch(day.date, task.reminder)" class="task-preview" (click)="modalService.viewOrEditModal(task)">
+                    <div>{{ task.title }}</div>
+                    <div>{{ calendarService.reminderTimeString(task.reminder) }}</div>
+                </div>
+            </ng-container>
+        </div>
     </div>
 </div>

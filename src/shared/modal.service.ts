@@ -4,6 +4,7 @@ import { taskTypes } from 'src/shared/data';
 import { modalToggleStates } from 'src/shared/data';
 import { modalTypes } from 'src/shared/data';
 import { TasksService } from '../shared/tasks.service';
+import { Node } from './node.model';
 
 @Injectable({
   providedIn: 'root'
@@ -97,6 +98,12 @@ export class ModalService {
       }
     }
 
+  }
+
+  viewOrEditModal(task: Node) { // --- delete parameter, task already provided in input
+    this.tasksService.nextSelectedCard(task); // set selected task
+    let mode = task.trashed ? modalToggleStates.view : modalToggleStates.edit;
+    this.toggleModal(modalTypes.task, mode); // show modal
   }
 
 }

@@ -20,5 +20,5 @@
     <div id="search-results" class="tasks-row" *ngIf="searchResults">
         <app-task-card *ngFor="let match of (matches$ | async)" [task]="match"></app-task-card>
     </div>
-    <app-calendar-view *ngIf="calenderView"></app-calendar-view>
+    <app-calendar-view *ngIf="calenderView" [all]="all"></app-calendar-view>
 </div>
