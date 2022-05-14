@@ -8,6 +8,8 @@ const loremIpsum: string = 'Lorem ipsum dolor sit amet, consectetur adipiscing e
 let nowTimestamp: number = Date.now();
 export const minutesMultiplier: number = 60000;
 
+export const dayMilliseconds: number = 86400000;
+
 export const preloadedTasks = [
   /*
   type: text or list (string)
@@ -26,11 +28,11 @@ export const preloadedTasks = [
   { type: taskTypes.list, title: 'Task List', 
   description: '', 
   complete: [mock1, mock1, mock1, mock1, mock1, mock1, mock1, mock1], incomplete: [mock2], 
-  reminder: nowTimestamp + (5 * minutesMultiplier), pinned: true, edited: nowTimestamp, created: nowTimestamp, trashed: false, done: false },
+  reminder: nowTimestamp + (20 * dayMilliseconds), pinned: true, edited: nowTimestamp, created: nowTimestamp, trashed: false, done: false },
 
   { type: taskTypes.text, title: 'Task Title', description: loremIpsum, 
   complete: [], incomplete: [], 
-  reminder: nowTimestamp  - 80000000, pinned: true, edited: nowTimestamp + (1 * minutesMultiplier), created: nowTimestamp+ (1 * minutesMultiplier), trashed: false, done: true },
+  reminder: nowTimestamp  - (4 * dayMilliseconds), pinned: true, edited: nowTimestamp + (1 * dayMilliseconds), created: nowTimestamp - (10 * dayMilliseconds), trashed: false, done: true },
 
   { type: taskTypes.list, title: 'Title 3', description: '', 
   complete: [mock1, mock1, mock1, mock1, mock1], incomplete: [], 
@@ -41,34 +43,34 @@ export const preloadedTasks = [
   reminder: 0, pinned: true, edited: nowTimestamp - (15 * minutesMultiplier), created: nowTimestamp - (15 * minutesMultiplier), trashed: false, done: false },
   
   // others - check pinned flag
-  { type: taskTypes.list, title: '', description: '', 
+  { type: taskTypes.list, title: 'Task 8', description: '', 
   complete: [mock1, mock1, mock1, mock1], incomplete: [mock1, mock1, mock1, mock1], 
-  reminder: nowTimestamp + 80000000, pinned: false, edited: nowTimestamp - (15 * minutesMultiplier), created: nowTimestamp - (15 * minutesMultiplier), trashed: false, done: false },
+  reminder: nowTimestamp + dayMilliseconds, pinned: false, edited: nowTimestamp - (10 * minutesMultiplier), created: nowTimestamp - (50 * minutesMultiplier), trashed: false, done: false },
 
   { type: taskTypes.text, title: 'Task Title', description: loremIpsum, 
   complete: [], incomplete: [], 
-  reminder: nowTimestamp + (15 * minutesMultiplier), pinned: false, edited: nowTimestamp + (2 * minutesMultiplier), created: nowTimestamp+ (2 * minutesMultiplier), trashed: false, done: false },
+  reminder: nowTimestamp + (5 * dayMilliseconds), pinned: false, edited: nowTimestamp + (80 * minutesMultiplier), created: nowTimestamp+ (180 * minutesMultiplier), trashed: false, done: false },
 
   { type: taskTypes.list, title: 'Tasks', 
   description: '', 
   complete: [], incomplete: [mock2, mock1, mock1, mock1, mock1], 
-  reminder: nowTimestamp + (20 * minutesMultiplier), pinned: false, edited: nowTimestamp + (3 * minutesMultiplier), created: nowTimestamp + (3 * minutesMultiplier), trashed: false, done: false },
+  reminder: nowTimestamp + (20 * minutesMultiplier), pinned: false, edited: nowTimestamp + (3 * minutesMultiplier), created: nowTimestamp + (3 * dayMilliseconds), trashed: false, done: false },
 
   { type: taskTypes.text, title: 'Subtring 0 - 10', description: loremIpsum.substring(0, 50), 
   complete: [], incomplete: [], 
-  reminder: 0, pinned: false, edited: nowTimestamp + (4 * minutesMultiplier), created: nowTimestamp + (4 * minutesMultiplier), trashed: false, done: false },
+  reminder: 0, pinned: false, edited: nowTimestamp + (4 * dayMilliseconds), created: nowTimestamp + (12 * dayMilliseconds), trashed: false, done: false },
 
   // trash - check trashed flag
   { type: taskTypes.list, title: 'Task List', 
   description: '', 
   complete: [mock1, mock1, mock1, mock1, mock1, mock1, mock1, mock1], incomplete: [mock2], 
-  reminder: nowTimestamp + (5 * minutesMultiplier), pinned: true, edited: nowTimestamp - (20 * minutesMultiplier), created: nowTimestamp - (20 * minutesMultiplier), trashed: true, done: false },
+  reminder: nowTimestamp + (.25 * minutesMultiplier), pinned: true, edited: nowTimestamp - (20 * minutesMultiplier), created: nowTimestamp - (20 * minutesMultiplier), trashed: true, done: false },
 
   { type: taskTypes.list, title: 'Tasks', description: '', 
   complete: [mock1, mock1, mock1, mock1], incomplete: [mock1, mock1, mock1, mock1], 
   reminder: 0, pinned: true, edited: nowTimestamp - (25 * minutesMultiplier), created: nowTimestamp - (25 * minutesMultiplier), trashed: true, done: false },
 
-  { type: taskTypes.list, title: '', description: '', 
+  { type: taskTypes.list, title: 'Task 99', description: '', 
   complete: [mock1, mock1, mock1, mock1], incomplete: [mock1, mock1, mock1, mock1], 
   reminder: 0, pinned: false, edited: nowTimestamp - (35 * minutesMultiplier), created: nowTimestamp - (35 * minutesMultiplier), trashed: true, done: false },
 ]

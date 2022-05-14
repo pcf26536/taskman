@@ -25,7 +25,7 @@ export class CalendarViewComponent implements OnInit {
   }
 
   dateMatch(date: string, reminder: number) {
-    return (new Date(reminder + 86400000)).toISOString().split('T')[0] == date;
+    return (new Date(reminder)).toISOString().split('T')[0] == date;
   }
 
 }
