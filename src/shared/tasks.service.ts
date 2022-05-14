@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { modalToggleStates, preloadedTasks } from 'src/shared/data';
 import { LinkedList } from './linked-list.model';
-import { BehaviorSubject, Observable, asapScheduler, scheduled, of , Subject} from "rxjs";
+import { BehaviorSubject, Observable, asapScheduler, of , Subject} from "rxjs";
 import { Node } from './node.model';
 import { taskTypes } from 'src/shared/data';
 import { NotificationService } from 'src/shared/notification.service';
@@ -196,7 +196,8 @@ export class TasksService {
   loadMatches(query: string): Observable<Node[]> {
     let all = [...this.pinned.traverse(), ...this.others.traverse()];
     return of(all, asapScheduler).pipe(
-      map(all => all.filter(task => task.description.includes(query)))
+      // expand it for list items
+      map(all => all.filter(task => task.description.includes(query) || task.title.includes(query)))
     );
   }
    

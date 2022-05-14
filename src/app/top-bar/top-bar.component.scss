@@ -47,6 +47,11 @@
             color: #80808B;
         }
     }
+
+    input:focus {
+        background: #FFFFFF;
+        box-shadow: -2px -2px 4px rgba(102, 102, 102, 0.5), 2px 2px 4px rgba(102, 102, 102, 0.5);
+    }
     
     #clear-search {
         left: -30px;

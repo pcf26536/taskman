@@ -10,7 +10,9 @@ import { TasksService } from '../../shared/tasks.service';
 })
 export class TopBarComponent implements OnInit {
 
-  search = new Search('')
+  search = new Search('');
+
+  input: boolean = false;
 
   constructor(public navigationService: NavigationService, private tasksService: TasksService) { }
 
@@ -18,8 +20,14 @@ export class TopBarComponent implements OnInit {
   }
 
   searchTasks() {
-    this.navigationService.switchView(5);
+    this.input = true;
     this.tasksService.carsQuerySubject.next(this.search.phrase);
+  }
+
+  clearSearch() {
+    this.navigationService.switchView(1);
+    this.search.phrase = '';
+    this.input = false;
   }
 
 }
