@@ -7,6 +7,8 @@ import { taskTypes } from 'src/shared/data';
 import { NotificationService } from 'src/shared/notification.service';
 import { notificationTypes } from 'src/shared/data';
 import { map } from 'rxjs/operators';
+import { ReminderService } from './reminder.service';
+import { CalendarService } from './calendar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +23,11 @@ export class TasksService {
   // 1. Trash
   trash = new LinkedList();
 
-  constructor(private notificationService: NotificationService) {
+  // timeouts array
+  reminderTimeouts: any[] = [];
+
+  constructor(private notificationService: NotificationService, private reminderService: ReminderService, 
+    private calendarService: CalendarService) {
     this.preloadTasks();
    }
 
@@ -76,6 +82,9 @@ export class TasksService {
     this.pinnedList.next(this.pinned);
     this.othersList.next(this.others);
     this.trashList.next(this.trash);
+
+    // trigger task reminder service
+    this.setReminderTimeouts();
    }
 
 
@@ -132,6 +141,8 @@ export class TasksService {
 
     // show notification
     this.notificationService.showNotification(notificationTypes.deleteTask);
+    // if reminder is deleted or reminder edited or task is deleted or task is restored => hook reminder service
+    this.refreshReminderTimeouts(task.reminder);
   }
 
   // restore task logic
@@ -151,6 +162,8 @@ export class TasksService {
 
     // show notification
     this.notificationService.showNotification(notificationTypes.restoreTask);
+    // if reminder is deleted or reminder edited or task is deleted or task is restored => hook reminder service
+    this.refreshReminderTimeouts(task.reminder);
   }
 
   addTask(task: Node) {
@@ -199,6 +212,41 @@ export class TasksService {
       // expand it for list items
       map(all => all.filter(task => task.description.includes(query) || task.title.includes(query)))
     );
+  }
+
+  setReminderTimeouts() {
+    // others and pinned lists
+    let tasks: Node[] = [...this.pinned.traverse(), ...this.others.traverse()];
+    tasks.forEach(task => {
+      if (this.reminderConditionsMet(task.reminder)) {
+        this.reminderTimeouts.push(
+          setTimeout(() => {
+              this.notificationService.nextMessage(this.reminderService.generateReminderMessage(task));
+              this.notificationService.showNotification(notificationTypes.reminder);
+            }, 
+            this.reminderService.computeReminderTimeout(task.reminder)
+          )
+        );
+      }
+    });
+  }
+
+  clearReminderTimeouts() {
+    for (let i=0; i<this.reminderTimeouts.length; i++) {
+      clearTimeout(this.reminderTimeouts[i]);
+    }
+  }
+
+  refreshReminderTimeouts(reminder: number) {
+    if (this.reminderConditionsMet(reminder)) {
+      this.clearReminderTimeouts();
+      this.setReminderTimeouts();
+    }
+  }
+
+  reminderConditionsMet(reminder: number) {
+    // if (reminder has not passed || is not zero)
+    return reminder && !this.calendarService.reminderPassed(reminder);
   }
    
 }

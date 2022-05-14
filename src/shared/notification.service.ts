@@ -19,6 +19,15 @@ export class NotificationService {
     private notificationObj = new BehaviorSubject({message: '', action: null});
     sharedNotificationObj = this.notificationObj.asObservable();
 
+    // notification/reminder message
+
+    private message = new BehaviorSubject('');
+    sharedMessage = this.message.asObservable();
+
+    nextMessage(message: string) {
+      this.message.next(message);
+    }
+
     taskDeleteMsg: string = 'Task deleted';
     restoreMsg: string = 'Task restored';
     reminderDeleteMsg: string = 'Reminder deleted';
@@ -29,7 +38,7 @@ export class NotificationService {
     }
 
     hideNotification() {
-      setTimeout(() => {this.closeNotification();}, 5000);
+      setTimeout(() => {this.closeNotification();}, 10000);
     }
 
     showNotification(type: string) {
@@ -50,6 +59,11 @@ export class NotificationService {
           this.notificationObj.next({message: this.undoMsg, action: null});
           break;
         }
+        // task reminder case
+        case notificationTypes.reminder : {
+          this.notificationObj.next({message: this.message.value, action: null});
+          break;
+        }
       }
       this.notify.next(true);
       this.hideNotification();
@@ -58,6 +72,7 @@ export class NotificationService {
     showReminderDeleteNotification() {
       // show notification
       this.showNotification(notificationTypes.deleteReminder);
+      // probably the most common place for all modules
     }
 
   constructor() { }

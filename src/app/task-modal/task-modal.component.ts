@@ -51,9 +51,9 @@ export class TaskModalComponent implements OnInit {
 
     if ( // if input/task values have changed (expand the values)
       this.taskModel.title != this.changeModel.title || 
-      this.taskModel.description != this.changeModel.description ||
-      this.taskModel.pinned != this.changeModel.pinned ||
-      this.taskModel.reminder != this.changeModel.reminder
+      this.taskModel.description != this.changeModel.description // ||
+      // this.taskModel.pinned != this.changeModel.pinned ||
+      //this.taskModel.reminder != this.changeModel.reminder
     ) {
       this.tasksService.addTask(this.taskModel);
     }
@@ -85,6 +85,8 @@ export class TaskModalComponent implements OnInit {
     else { // (this.editMode == modalToggleStates.edit)
       this.selectedTask.reminder = value;
     }
+    // if reminder is deleted or reminder edited or task is deleted or task is restored => hook reminder service
+    this.tasksService.refreshReminderTimeouts(value);
   }
 
   deleteFromModal() {
@@ -108,12 +110,18 @@ export class TaskModalComponent implements OnInit {
   }
 
   deleteReminder() {
+    // refresh reminder timeouts
+    let reminder = 0;
     if (this.editMode == modalToggleStates.create) {
+      reminder = this.taskModel.reminder;
       this.taskModel.reminder = 0;
     }
     else { // (this.editMode == modalToggleStates.edit)
+      reminder = this.selectedTask.reminder;
       this.selectedTask.reminder = 0;
     }
+    // if reminder is deleted or reminder edited or task is deleted or task is restored => hook reminder service
+    this.tasksService.refreshReminderTimeouts(reminder);
     this.notificationService.showReminderDeleteNotification();
   }
 

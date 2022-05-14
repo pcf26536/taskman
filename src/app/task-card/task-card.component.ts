@@ -4,9 +4,9 @@ import { TasksService } from '../../shared/tasks.service';
 import { Node } from 'src/shared/node.model';
 import { taskTypes } from 'src/shared/data';
 import { modalToggleStates } from 'src/shared/data';
-import { modalTypes } from 'src/shared/data';
 import { CalendarService } from 'src/shared/calendar.service';
 import { NotificationService } from 'src/shared/notification.service';
+import { ReminderService } from 'src/shared/reminder.service';
 
 @Component({
   selector: 'app-task-card',
@@ -25,7 +25,8 @@ export class TaskCardComponent implements OnInit {
   mode: any = modalToggleStates.edit;
 
   constructor(public modalService: ModalService, public tasksService: TasksService,
-    public calendarService: CalendarService, private notificationService: NotificationService) { }
+    public calendarService: CalendarService, private notificationService: NotificationService, 
+    private reminderService: ReminderService) { }
 
   ngOnInit(): void {
   }
@@ -36,6 +37,8 @@ export class TaskCardComponent implements OnInit {
   }
 
   deleteReminder() {
+    // if reminder is deleted or reminder edited or task is deleted or task is restored => hook reminder service
+    this.tasksService.refreshReminderTimeouts(this.task.reminder);
     this.task.reminder = 0;
     this.notificationService.showReminderDeleteNotification();
   }

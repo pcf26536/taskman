@@ -47,7 +47,7 @@ export const preloadedTasks = [
 
   { type: taskTypes.text, title: 'Task Title', description: loremIpsum, 
   complete: [], incomplete: [], 
-  reminder: nowTimestamp + (10 * minutesMultiplier), pinned: false, edited: nowTimestamp + (2 * minutesMultiplier), created: nowTimestamp+ (2 * minutesMultiplier), trashed: false, done: false },
+  reminder: nowTimestamp + (.125 * minutesMultiplier), pinned: false, edited: nowTimestamp + (2 * minutesMultiplier), created: nowTimestamp+ (2 * minutesMultiplier), trashed: false, done: false },
 
   { type: taskTypes.list, title: 'Tasks', 
   description: '', 
@@ -80,4 +80,4 @@ export const modalTypes = {reminder: 'reminder', task: 'task', all: 'all'};
 
 export const locale = 'en-GB';
 
-export const notificationTypes = {deleteReminder: 'delr', deleteTask: 'delt', restoreTask: 'rest', undo: 'undo'};
+export const notificationTypes = {deleteReminder: 'delr', deleteTask: 'delt', restoreTask: 'rest', undo: 'undo', reminder: 'reminder'};
