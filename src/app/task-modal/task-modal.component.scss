@@ -70,15 +70,27 @@ textarea {
     font-size: 15px;
 }
 
+.list-item {
+    margin: .25em 0;
+}
+
 input::placeholder, ::placeholder {
     color: #000000;
 }
 
-.labels, .action-buttons {
+.list-item.complete input {
+    color: #C4C4C4;
+}
+
+.labels, .action-buttons, .list-items {
     margin: 0 2em;
 }
 
 .action-buttons {
     grid-template-columns: repeat(4, 1fr);
     margin-bottom: 20px;
+}
+
+.list-items.readonly {
+    pointer-events: none;
 }

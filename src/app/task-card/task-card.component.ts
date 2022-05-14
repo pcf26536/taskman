@@ -30,14 +30,8 @@ export class TaskCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  viewOrEditModal(task: Node) { // --- delete parameter, task already provided in input
-    this.tasksService.nextSelectedCard(task); // set selected task
-    this.mode = task.trashed ? modalToggleStates.view : modalToggleStates.edit;
-    this.modalService.toggleModal(modalTypes.task, this.mode); // show modal
-  }
-
   showTaskAndReminderModals(task: Node) {
-    this.viewOrEditModal(task);
+    this.modalService.viewOrEditModal(task);
     this.modalService.nextReminderModalState(true);
   }
 

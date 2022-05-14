@@ -36,12 +36,47 @@
         <textarea name="description" placeholder="Add a description..." *ngIf="selectedType == types.text && editMode == modes.create" [(ngModel)]="taskModel.description"></textarea>
         <textarea name="description" placeholder="Add a description..." *ngIf="selectedType == types.text && editMode == modes.edit" [(ngModel)]="selectedTask.description"></textarea>
         <textarea name="description" *ngIf="selectedType == types.text && editMode == modes.view" [(ngModel)]="selectedTask.description" readonly></textarea>
-        <div *ngIf="selectedType == types.list">
-            <div *ngFor="" class="list-item">
-            <label for="list-item">r</label>
-            <input type="checkbox" name="list-item" id="" value="">
+        
+        <ng-container *ngIf="selectedType == types.list && editMode == modes.view">
+            <div class="list-items readonly" *ngIf="selectedTask.complete || selectedTask.incomplete">
+                <ng-container *ngIf="selectedTask.incomplete">
+                    <div class="list-item incomplete" *ngFor="let item of selectedTask.incomplete">
+                        <input type="checkbox" name="list-item">
+                        {{ item }}
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="selectedTask.complete.length">
+                    <hr *ngIf="selectedTask.incomplete.length">
+                    <div class="list-item complete" *ngFor="let item of selectedTask.complete">
+                        <input type="checkbox" name="list-item" checked disabled>
+                        {{ item }}
+                    </div>
+                </ng-container>
             </div>
-        </div>
+        </ng-container>
+
+        <ng-container *ngIf="selectedType == types.list && editMode == modes.edit">
+            <div class="list-items" *ngIf="selectedTask.complete || selectedTask.incomplete">
+                <ng-container *ngIf="selectedTask.incomplete">
+                    <div class="list-item incomplete" *ngFor="let item of selectedTask.incomplete; let i = index">
+                        <input type="checkbox" name="list-item">
+                        <input type="text" name="list-item" [(ngModel)]="selectedTask.incomplete[i]">
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="selectedTask.complete.length">
+                    <hr *ngIf="selectedTask.incomplete.length">
+                    <div class="list-item complete" *ngFor="let item of selectedTask.complete; let i = index">
+                        <input type="checkbox" name="list-item" checked disabled>
+                        <input type="text" name="list-item" [value]="item">
+                    </div>
+                </ng-container>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="selectedType == types.list && editMode == modes.create">
+            <div class="list-items" *ngIf="taskModel.complete || taskModel.incomplete">
+            </div>
+        </ng-container>
 
         <div class="labels">
             <div class="reminder-label" *ngIf="(!selectedTask.trashed && selectedTask.reminder) || taskModel.reminder" [class.done]="selectedTask.done" [class.passed]="calendarService.reminderPassed(selectedTask.reminder)" [class.active]="!calendarService.reminderPassed(selectedTask.reminder) || taskModel.reminder">

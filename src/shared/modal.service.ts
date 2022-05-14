@@ -103,6 +103,8 @@ export class ModalService {
   viewOrEditModal(task: Node) { // --- delete parameter, task already provided in input
     this.tasksService.nextSelectedCard(task); // set selected task
     let mode = task.trashed ? modalToggleStates.view : modalToggleStates.edit;
+    // set selected type (text, list)
+    this.tasksService.nextSelectedTaskType(task.type);
     this.toggleModal(modalTypes.task, mode); // show modal
   }
 

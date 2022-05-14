@@ -1,4 +1,4 @@
-<div id="task-card" class="task" (click)="viewOrEditModal(task)">
+<div id="task-card" class="task" (click)="modalService.viewOrEditModal(task)">
     <div class="title-row">
         <div class="task-title">{{ task.title }}</div>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="icon-button" *ngIf="!task.pinned && !task.trashed" (click)="this.tasksService.pinToggle(task)">
@@ -23,36 +23,24 @@
         </svg>                
     </div>
 
-    <div class="task-description">
+    <div class="task-description" *ngIf="task.description">
     {{ task.description }}
     </div>
     
-    <div class="list-items" *ngFor="">
-        <div class="list-item">
-            <input type="checkbox" name="list-item" id="">
-            <input type="text" name="list-item" id="" value="not selected">
-        </div>
-        <div class="list-item">
-            <input type="checkbox" name="list-item" id="">
-            <input type="text" name="list-item" id="" value="not selected">
-        </div>
-        <div class="list-item">
-            <input type="checkbox" name="list-item" id="">
-            <input type="text" name="list-item" id="" value="not selected">
-        </div>
-        <hr/>
-        <div class="list-item">
-            <input type="checkbox" name="list-item" id="" value="" checked>
-            <input type="text" name="list-item" id="" value="disabled selected">
-        </div>
-        <div class="list-item">
-            <input type="checkbox" name="list-item" id="" value="" checked>
-            <input type="text" name="list-item" id="" value="disabled selected">
-        </div>
-        <div class="list-item">
-            <input type="checkbox" name="list-item" id="" value="" checked>
-            <input type="text" name="list-item" id="" value="disabled selected">
-        </div>
+    <div class="list-items" *ngIf="task.complete || task.incomplete">
+        <ng-container *ngIf="task.incomplete">
+            <div class="list-item incomplete" *ngFor="let item of task.incomplete">
+                <input type="checkbox" name="list-item">
+                {{ item }}
+            </div>
+        </ng-container>
+        <ng-container *ngIf="task.complete.length">
+            <hr *ngIf="task.incomplete.length">
+            <div class="list-item complete" *ngFor="let item of task.complete">
+                <input type="checkbox" name="list-item" checked disabled>
+                {{ item }}
+            </div>
+        </ng-container>
     </div>
 
     <div class="reminder-label" *ngIf="task.reminder && !task.trashed" [class.done]="task.done" [class.passed]="calendarService.reminderPassed(task.reminder)" [class.active]="!calendarService.reminderPassed(task.reminder)">

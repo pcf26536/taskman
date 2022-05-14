@@ -49,7 +49,7 @@ export class AppComponent {
     // modal types
     this.modalService.sharedTaskModal.subscribe(status=> this.taskModal = status);
     this.modalService.sharedReminderModal.subscribe(status=> this.reminderModal = status);
-    // task type (create)
+    // task type (list/text)
     this.tasksService.sharedSelectedType.subscribe(value=> this.selectedTaskType = value);
     // selected task/card (view/edit)
     this.tasksService.sharedSelectedCard.subscribe(value=> this.selectedTask = value);

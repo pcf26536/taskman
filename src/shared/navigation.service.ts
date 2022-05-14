@@ -7,13 +7,13 @@ import { BehaviorSubject } from "rxjs";
 export class NavigationService {
 
   // views
-  private allTasks = new BehaviorSubject(false);
+  private allTasks = new BehaviorSubject(true);
   sharedAllTasks = this.allTasks.asObservable();
 
   private todayView = new BehaviorSubject(false);
   sharedTodayView = this.todayView.asObservable();
 
-  private calenderView = new BehaviorSubject(true);
+  private calenderView = new BehaviorSubject(false);
   sharedCalenderView = this.calenderView.asObservable();
 
   private trashView = new BehaviorSubject(false);
