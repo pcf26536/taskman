@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavigationService } from 'src/shared/navigation.service';
 import { ModalService } from 'src/shared/modal.service';
 import { TasksService } from '../shared/tasks.service';
-import { taskTypes } from 'src/shared/data';
 import { Node } from 'src/shared/node.model';
 
 @Component({
@@ -25,9 +24,6 @@ export class AppComponent {
   // modal types
   taskModal: boolean = false;
   reminderModal: boolean = false;
-  
-  // selected task type (create)
-  selectedTaskType: string = taskTypes.text;
 
   // selected task
   selectedTask = new Node('');
@@ -49,8 +45,6 @@ export class AppComponent {
     // modal types
     this.modalService.sharedTaskModal.subscribe(status=> this.taskModal = status);
     this.modalService.sharedReminderModal.subscribe(status=> this.reminderModal = status);
-    // task type (list/text)
-    this.tasksService.sharedSelectedType.subscribe(value=> this.selectedTaskType = value);
     // selected task/card (view/edit)
     this.tasksService.sharedSelectedCard.subscribe(value=> this.selectedTask = value);
   }

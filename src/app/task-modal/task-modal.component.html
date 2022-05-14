@@ -39,11 +39,11 @@
             </div>                 
         </div>
         
-        <textarea name="description" placeholder="Add a description..." *ngIf="selectedType == types.text && editMode == modes.create" [(ngModel)]="taskModel.description"></textarea>
-        <textarea name="description" placeholder="Add a description..." *ngIf="selectedType == types.text && editMode == modes.edit" [(ngModel)]="selectedTask.description"></textarea>
-        <textarea name="description" *ngIf="selectedType == types.text && editMode == modes.view" [(ngModel)]="selectedTask.description" readonly></textarea>
+        <textarea name="description" placeholder="Add a description..." *ngIf="selectedTaskType == types.text && editMode == modes.create" [(ngModel)]="taskModel.description"></textarea>
+        <textarea name="description" placeholder="Add a description..." *ngIf="selectedTaskType == types.text && editMode == modes.edit" [(ngModel)]="selectedTask.description"></textarea>
+        <textarea name="description" *ngIf="selectedTaskType == types.text && editMode == modes.view" [(ngModel)]="selectedTask.description" readonly></textarea>
         
-        <ng-container *ngIf="selectedType == types.list && editMode == modes.view">
+        <ng-container *ngIf="selectedTaskType == types.list && editMode == modes.view">
             <div class="list-items readonly" *ngIf="selectedTask.complete || selectedTask.incomplete">
                 <ng-container *ngIf="selectedTask.incomplete">
                     <div class="list-item incomplete" *ngFor="let item of selectedTask.incomplete">
@@ -61,7 +61,7 @@
             </div>
         </ng-container>
 
-        <ng-container *ngIf="selectedType == types.list && editMode == modes.edit">
+        <ng-container *ngIf="selectedTaskType == types.list && editMode == modes.edit">
             <div class="list-items" *ngIf="selectedTask.complete || selectedTask.incomplete">
                 <ng-container *ngIf="selectedTask.incomplete">
                     <div class="list-item incomplete" *ngFor="let item of selectedTask.incomplete; let i = index">
@@ -87,7 +87,7 @@
             </div>
         </ng-container>
 
-        <ng-container *ngIf="selectedType == types.list && editMode == modes.create">
+        <ng-container *ngIf="selectedTaskType == types.list && editMode == modes.create">
             
             <div class="list-items">
                 <div id="add-item" class="list-item">

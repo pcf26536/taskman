@@ -8,7 +8,7 @@ import { modalToggleStates } from 'src/shared/data';
 import { CalendarService } from 'src/shared/calendar.service';
 import { ReminderService } from 'src/shared/reminder.service';
 import { NotificationService } from 'src/shared/notification.service';
-import { ListItem } from '../list-item.model';
+import { ListItem } from '../../shared/list-item.model';
 
 @Component({
   selector: 'app-task-modal',
@@ -18,19 +18,22 @@ import { ListItem } from '../list-item.model';
 export class TaskModalComponent implements OnInit {
 
   @Input() taskModal: boolean = false;
-  @Input() selectedType: string = taskTypes.text;
+  
   @Input() selectedTask = new Node(taskTypes.text);
 
   types: any = taskTypes;
+  
+  selectedTaskType = taskTypes.text;
 
-  changeModel = new Node(this.selectedType);
-  taskModel = new Node(this.selectedType);
+  changeModel: Node = new Node(taskTypes.text);
+  taskModel = new Node(taskTypes.text);
 
   modes: any = modalToggleStates;
 
   editMode: string = modalToggleStates.create;
 
   listItem = new ListItem('');
+
 
   constructor(public modalService: ModalService, public tasksService: TasksService, 
     public calendarService: CalendarService, public reminderService: ReminderService,
@@ -45,6 +48,11 @@ export class TaskModalComponent implements OnInit {
         //this.taskModel = this.selectedTask;
         //console.log(this.selectedTask.title);
       }
+    });
+    this.tasksService.sharedSelectedType.subscribe(value=> {
+      this.selectedTaskType = value;
+      this.changeModel = new Node(value);
+      this.taskModel = new Node(value);
     });
   }
 
@@ -169,7 +177,7 @@ export class TaskModalComponent implements OnInit {
     else { // or edit (view): wont happen for now cause no item delete
       
     }
-    event.prevent.preventDefault();
+    event.preventDefault();
   }
 
   removeItem(index: number) {
