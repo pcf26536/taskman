@@ -78,6 +78,10 @@ input::placeholder, ::placeholder {
     color: #000000;
 }
 
+#add-item input::placeholder {
+    color: #80808B;
+}
+
 .list-item.complete input {
     color: #C4C4C4;
 }
@@ -93,4 +97,9 @@ input::placeholder, ::placeholder {
 
 .list-items.readonly {
     pointer-events: none;
+}
+
+.action-buttons .trash-actions {
+    column-gap: 25px;
+    width: fit-content;
 }

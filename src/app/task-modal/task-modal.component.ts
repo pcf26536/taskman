@@ -8,6 +8,7 @@ import { modalToggleStates } from 'src/shared/data';
 import { CalendarService } from 'src/shared/calendar.service';
 import { ReminderService } from 'src/shared/reminder.service';
 import { NotificationService } from 'src/shared/notification.service';
+import { ListItem } from '../list-item.model';
 
 @Component({
   selector: 'app-task-modal',
@@ -28,6 +29,8 @@ export class TaskModalComponent implements OnInit {
   modes: any = modalToggleStates;
 
   editMode: string = modalToggleStates.create;
+
+  listItem = new ListItem('');
 
   constructor(public modalService: ModalService, public tasksService: TasksService, 
     public calendarService: CalendarService, public reminderService: ReminderService,
@@ -51,11 +54,16 @@ export class TaskModalComponent implements OnInit {
 
     if ( // if input/task values have changed (expand the values)
       this.taskModel.title != this.changeModel.title || 
-      this.taskModel.description != this.changeModel.description // ||
+      this.taskModel.description != this.changeModel.description ||
+      this.taskModel.incomplete.length != this.changeModel.incomplete.length ||
+      this.taskModel.complete.length != this.changeModel.complete.length
       // this.taskModel.pinned != this.changeModel.pinned ||
       //this.taskModel.reminder != this.changeModel.reminder
     ) {
+      console.log(this.taskModel.type);
       this.tasksService.addTask(this.taskModel);
+      // when a task is created
+      this.tasksService.refreshReminderTimeouts(this.taskModel.reminder);
     }
     
   }
@@ -132,6 +140,36 @@ export class TaskModalComponent implements OnInit {
     else { // or edit (view - pin is not shown)
       this.tasksService.pinToggle(this.selectedTask);
     }
+  }
+
+  markItem(index: number) {
+    console.log(index);
+    if (this.editMode == modalToggleStates.create) {
+      this.taskModel.complete.unshift(this.taskModel.incomplete.splice(index, 1)[0]);
+    }
+    else { // or edit (view)
+      this.selectedTask.complete.unshift(this.selectedTask.incomplete.splice(index, 1)[0]);
+    }
+  }
+
+  unMarkItem(index: number) {
+    if (this.editMode == modalToggleStates.create) {
+      this.taskModel.incomplete.unshift(this.taskModel.complete.splice(index, 1)[0]);
+    }
+    else { // or edit (view)
+      this.selectedTask.incomplete.unshift(this.selectedTask.complete.splice(index, 1)[0]);
+    }
+  }
+
+  addItem(event: any) {
+    this.listItem.value = '';
+    if (this.editMode == modalToggleStates.create) {
+      this.taskModel.incomplete.unshift(event.target.value);
+    }
+    else { // or edit (view): wont happen for now cause no item delete
+      
+    }
+    event.prevent.preventDefault();
   }
 
 }

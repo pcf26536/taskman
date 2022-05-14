@@ -65,6 +65,7 @@ export class ModalService {
             this.taskModal.next(true);
             // text or list task type from trigger
             this.tasksService.nextSelectedTaskType(taskType);
+            console.log(taskType);
             this.tasksService.nextTaskModalMode(modalToggleStates.create);
             break;
           }

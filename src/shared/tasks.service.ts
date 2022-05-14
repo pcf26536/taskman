@@ -55,6 +55,7 @@ export class TasksService {
 
   nextSelectedTaskType(selectedType: string) {
     this.selectedTaskType.next(selectedType);
+    console.log(selectedType);
   }
 
   // task modal mode
