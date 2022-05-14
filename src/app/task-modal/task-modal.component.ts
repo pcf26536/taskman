@@ -125,4 +125,13 @@ export class TaskModalComponent implements OnInit {
     this.notificationService.showReminderDeleteNotification();
   }
 
+  pinToggle() {
+    if (this.editMode == modalToggleStates.create) {
+      this.taskModel.pinned = !this.taskModel.pinned; 
+    }
+    else { // or edit (view - pin is not shown)
+      this.tasksService.pinToggle(this.selectedTask);
+    }
+  }
+
 }
