@@ -11,6 +11,7 @@
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  padding: 0 2em;
 }
 
 button {
@@ -24,6 +25,7 @@ button {
   -webkit-column-gap: 5px;
           column-gap: 5px;
   padding: .5em 1em;
+  border: 1px solid #DDDDDD;
 }
 
 button:hover {

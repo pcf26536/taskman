@@ -1,34 +1,26 @@
 #task-card {
     border: 1px solid #DDDDDD;
     width: 240px;
-    padding: 1.5em;
+    padding: 1.5em 1.5em .5em;
     display: grid;
     gap: 20px;
     grid-template-rows: auto;
     cursor: pointer;
     background-color: #ffffff;
-    //height: 100%;
 }
 
 #task-card:hover {
-    filter: drop-shadow(-1px -1px 2px rgba(102, 102, 102, 0.25)) drop-shadow(2px 2px 3px rgba(102, 102, 102, 0.25));
-
-    .title-row {
-        display: flex;
-
-        svg {
-            display: block;
-        }
-    }
+    filter: drop-shadow(-1px -1px 2px rgba(102, 102, 102, 0.25)) drop-shadow(1px 1px 3px rgba(102, 102, 102, 0.25));
 
     .action-buttons {
-        display: grid;
+        visibility: visible;
     }
 }
 
 .action-buttons {
+    display: grid;
     width: 15%;
-    display: none;
+    visibility: hidden;
     align-items: center;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 20px;
@@ -37,13 +29,6 @@
 
 .reminder-label {
     width: fit-content;
-}
-
-.title-row {
-
-    svg {
-        display: none;
-    }
 }
 
 .list-items {

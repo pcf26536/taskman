@@ -102,9 +102,9 @@ export class NavigationService {
       } 
       case 3: {
         // activate/show
-        this.createTaskField.next(true);
         this.calenderView.next(true);
         // deactive/hide
+        this.createTaskField.next(false);
         this.allTasks.next(false);
         this.todayView.next(false);
         this.trashView.next(false);

@@ -3,36 +3,35 @@
 /* Tooltip container */
 .tooltip {
   position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
-  /* If you want dots under the hoverable text */
+  border-radius: 50%;
+  padding: 5px;
 }
 
 /* Tooltip text */
 .tooltip .tooltiptext {
   visibility: hidden;
-  background-color: black;
-  color: #fff;
   text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-  width: 120px;
+  padding: 5px 7px;
+  background: #80808B;
+  border-radius: 5px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   top: 100%;
   left: 50%;
   margin-left: -60px;
   /* Use half of the width (120/2 = 60), to center the tooltip */
   /* Position the tooltip text - see examples below! */
   position: absolute;
-  z-index: 1;
+  z-index: 105;
+  font-weight: 400;
+  font-size: 14px;
+  color: #FFFFFF;
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
-}
-
-.matched {
-  color: #FFF0C6;
 }
 
 .current {
@@ -80,13 +79,21 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -ms-grid-columns: (auto)[2];
-      grid-template-columns: repeat(2, auto);
+  -ms-grid-columns: (auto)[3];
+      grid-template-columns: repeat(3, auto);
   -webkit-column-gap: 10px;
           column-gap: 10px;
   border-radius: 50px;
-  padding: .5em 1em;
+  padding: .25em 1em;
   font-size: 12px;
+}
+
+.reminder-label:hover {
+  cursor: pointer;
+}
+
+.reminder-label:hover .clear-reminder {
+  visibility: visible;
 }
 
 .reminder-label.active {
@@ -102,8 +109,16 @@ body {
   text-decoration: line-through;
 }
 
+.clear-reminder {
+  visibility: hidden;
+}
+
 .icon-button {
   cursor: pointer;
+}
+
+.icon-button.invalid {
+  cursor: not-allowed;
 }
 
 button {
@@ -117,15 +132,14 @@ button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .list-item input {
   border: 0;
-}
-
-.list-items {
-  padding-top: 1em;
-  padding-bottom: 1em;
+  font-size: 16px;
 }
 
 .list-items hr {
@@ -144,7 +158,7 @@ button {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .hidden {
@@ -180,5 +194,31 @@ input:focus, textarea:focus {
   -ms-grid-columns: (auto)[4];
       grid-template-columns: repeat(4, auto);
   gap: 20px;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+}
+
+.modal {
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-font-smoothing: antialiased;
+  background-color: #ffffff;
+  -webkit-filter: drop-shadow(-2px -2px 3px rgba(102, 102, 102, 0.25)) drop-shadow(2px 2px 3px rgba(102, 102, 102, 0.25));
+          filter: drop-shadow(-2px -2px 3px rgba(102, 102, 102, 0.25)) drop-shadow(2px 2px 3px rgba(102, 102, 102, 0.25));
+  position: fixed;
+}
+
+.complete {
+  color: #C4C4C4;
+}
+
+.section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 /*# sourceMappingURL=styles.css.map */

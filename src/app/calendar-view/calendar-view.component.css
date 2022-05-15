@@ -1,0 +1,84 @@
+#calendar-view {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+#header-row, .task-preview {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#header-row {
+  padding: 0 1em 1em;
+}
+
+#header-row #month {
+  color: #F29900;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+#header-row #year {
+  font-weight: 600;
+}
+
+#days-row {
+  color: #999999;
+}
+
+.cells {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-grid-columns: (1fr)[7];
+      grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+}
+
+.dates {
+  height: 11vh;
+  background-color: #ffffff;
+}
+
+#dates-grid {
+  border: 1px solid rgba(102, 102, 102, 0.25);
+  background-color: rgba(102, 102, 102, 0.25);
+}
+
+.cell {
+  padding: .5em;
+}
+
+.not-current {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.today {
+  color: #F29900;
+  font-weight: 700;
+}
+
+.today .task-preview {
+  background-color: #F29900;
+}
+
+.task-preview {
+  color: #ffffff;
+  width: 8vw;
+  font-weight: 400;
+  font-size: 14px;
+  background-color: #C4C4C4;
+  padding: 2px 4px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+/*# sourceMappingURL=calendar-view.component.css.map */

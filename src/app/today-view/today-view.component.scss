@@ -4,6 +4,7 @@
     align-items: center;
     column-gap: 20px;
     width: fit-content;
+    padding: 0 2em;
 }
 
 button {
@@ -12,6 +13,7 @@ button {
     grid-template-columns: repeat(2, auto);
     column-gap: 5px;
     padding: .5em 1em;
+    border: 1px solid #DDDDDD;
 }
 
 button:hover {
