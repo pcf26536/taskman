@@ -28,7 +28,7 @@ export const preloadedTasks = [
   { type: taskTypes.list, title: 'Task List', 
   description: '', 
   complete: [mock1, mock1, mock1, mock1, mock1, mock1, mock1, mock1], incomplete: [mock2], 
-  reminder: nowTimestamp + (20 * dayMilliseconds), pinned: true, edited: nowTimestamp, created: nowTimestamp, trashed: false, done: false },
+  reminder: nowTimestamp + (20 * dayMilliseconds), pinned: true, edited: nowTimestamp - dayMilliseconds, created: nowTimestamp, trashed: false, done: false },
 
   { type: taskTypes.text, title: 'Task Title', description: loremIpsum, 
   complete: [], incomplete: [], 

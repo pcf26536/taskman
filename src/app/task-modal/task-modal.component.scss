@@ -72,6 +72,7 @@ textarea {
 
 .list-item {
     margin: .25em 0;
+    //width: 80%;
 }
 
 input::placeholder, ::placeholder {
@@ -102,4 +103,25 @@ input::placeholder, ::placeholder {
 .action-buttons .trash-actions {
     column-gap: 25px;
     width: fit-content;
+}
+
+%demarcate {
+    border-top: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+#add-item {
+    @extend %demarcate;
+}
+
+.list-item input:focus {
+    @extend %demarcate;
+}
+
+.list-item input {
+    display: block;
+}
+
+.list-item input:nth-child(2) {
+    width: 450px;
 }

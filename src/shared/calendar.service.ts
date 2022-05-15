@@ -26,6 +26,21 @@ export class CalendarService {
     );
   }
 
+  // edited date string
+  editedDateTimeString(edited: number) {
+    let str = '';
+    let date = new Date(edited);
+    if (date.getDate() == this.currentDate) {
+      str = date.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' });
+    } else if (date.getDate() == this.currentDate - 1) {
+      str = 'yesterday'
+    }
+    else {
+      str = date.toLocaleDateString(locale, { month: 'short', day: 'numeric' });
+    }
+    return str;
+  }
+
   reminderTimeString(reminder: number) {
     return (new Date(reminder)).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' });
   }
@@ -63,12 +78,6 @@ export class CalendarService {
     return new Date(this.currentYear, month + 1, 0).getDate();
   }
   
-  //public currentMonthDays = this.getDaysInMonth(this.currentMonthNumber);
-
-  //public previousMonthDays = this.getDaysInMonth(this.currentMonthNumber - 1);
-
-  //public nextMonthDays = this.getDaysInMonth(this.currentMonthNumber + 1);
-
   createDaysForCurrentMonth() {
     console.log(this.currentMonthNumber);
     return [...Array(this.getDaysInMonth(this.currentMonthNumber))].map((day, index) => {
@@ -114,8 +123,6 @@ export class CalendarService {
     
 
     return [...Array(visibleNumberOfDaysFromPreviousMonth)].map((day, index) => {
-      //console.log(new Date(previousMonth.getFullYear(), previousMonth.getMonth(), previousMonthLastMondayDayOfMonth + index + 1).toISOString().split('T')[0]);
-      //console.log((new Date(`${previousMonth.getFullYear()}-${previousMonth.getMonth() + 1}-${previousMonthLastMondayDayOfMonth + index + 1}`)).toISOString().split('T')[0]);
       return {
         date: new Date(previousMonth.getFullYear(), previousMonth.getMonth(), previousMonthLastMondayDayOfMonth + index + 1).toISOString().split('T')[0],
         dayOfMonth: previousMonthLastMondayDayOfMonth + index,
@@ -125,13 +132,9 @@ export class CalendarService {
   }
 
   createDaysForNextMonth() {
-    //const lastDayOfTheMonthWeekday = this.getWeekday(
-    //  `${this.currentYear}-${this.currentMonthNumber}-${this.currentMonthDays.length}`
-    //);
     const lastDayOfTheMonthWeekday = this.getWeekday(this.currentMonthDays[this.currentMonthDays.length-1].date);
     console.log(lastDayOfTheMonthWeekday);
   
-    //const nextMonth = new Date(`${this.currentYear}-${this.getDaysInMonth(this.currentMonthNumber + 1)}-01`);
     const nextMonth = this.addMonths(1, new Date(this.currentMonthDays[0].date));
   
     const visibleNumberOfDaysFromNextMonth = lastDayOfTheMonthWeekday ? 7 - lastDayOfTheMonthWeekday : lastDayOfTheMonthWeekday;

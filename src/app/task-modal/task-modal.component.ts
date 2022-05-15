@@ -34,6 +34,8 @@ export class TaskModalComponent implements OnInit {
 
   listItem = new ListItem('');
 
+  shadowCopy: Node = this.selectedTask;
+
 
   constructor(public modalService: ModalService, public tasksService: TasksService, 
     public calendarService: CalendarService, public reminderService: ReminderService,
@@ -56,6 +58,14 @@ export class TaskModalComponent implements OnInit {
     });
   }
 
+  selectedNoteEdit() {
+    this.selectedTask.edited = Date.now();
+  }
+
+  newNoteEdit() {
+    this.taskModel.edited = Date.now();
+  }
+
   formAction() {
     // close modal
     this.modalService.toggleModal(modalTypes.all);
@@ -64,14 +74,23 @@ export class TaskModalComponent implements OnInit {
       this.taskModel.title != this.changeModel.title || 
       this.taskModel.description != this.changeModel.description ||
       this.taskModel.incomplete.length != this.changeModel.incomplete.length ||
-      this.taskModel.complete.length != this.changeModel.complete.length
-      // this.taskModel.pinned != this.changeModel.pinned ||
-      //this.taskModel.reminder != this.changeModel.reminder
+      this.taskModel.complete.length != this.changeModel.complete.length ||
+      JSON.stringify(this.taskModel.incomplete) != JSON.stringify(this.changeModel.incomplete) ||
+      JSON.stringify(this.taskModel.complete) != JSON.stringify(this.changeModel.complete)
+      // [pinned and reminder cannot soley define a task] - anyways, they have handling functions below
     ) {
-      console.log(this.taskModel.type);
+      this.taskModel.created = Date.now();
+      this.newNoteEdit();
       this.tasksService.addTask(this.taskModel);
       // when a task is created
       this.tasksService.refreshReminderTimeouts(this.taskModel.reminder);
+    }
+
+    else if ( // if input/task values have changed (expand the values)
+      this.selectedTask.title != this.shadowCopy.title || 
+      this.selectedTask.description != this.shadowCopy.description
+    ) {
+      this.selectedNoteEdit();
     }
     
   }
@@ -97,9 +116,11 @@ export class TaskModalComponent implements OnInit {
     let value = this.reminderService.reminderInMilliseconds(dateTime);
     if (this.editMode == modalToggleStates.create) {
       this.taskModel.reminder = value;
+      this.newNoteEdit();
     }
     else { // (this.editMode == modalToggleStates.edit)
       this.selectedTask.reminder = value;
+      this.selectedNoteEdit();
     }
     // if reminder is deleted or reminder edited or task is deleted or task is restored => hook reminder service
     this.tasksService.refreshReminderTimeouts(value);
@@ -108,20 +129,26 @@ export class TaskModalComponent implements OnInit {
   deleteFromModal() {
     // close modal
     this.modalService.toggleModal(modalTypes.all);
-
-    /*if ( // if input/task values have changed (NEEED TO expand the values)
-      this.taskModel.title != this.changeModel.title || 
-      this.taskModel.description != this.changeModel.description ||
-      this.taskModel.pinned != this.changeModel.pinned ||
-      this.taskModel.reminder != this.changeModel.reminder
-    ) {
-      this.tasksService.addTask(this.taskModel); // save the task and
-      this.tasksService.deleteTask(this.taskModel); // delete the new task
+    if (this.editMode == modalToggleStates.create) {
+      if ( // if input/task values have changed (NEEED TO expand the values)
+        this.taskModel.title != this.changeModel.title || 
+        this.taskModel.description != this.changeModel.description
+      ) {
+        this.tasksService.addTask(this.taskModel); // save the task and
+        this.tasksService.deleteTask(this.taskModel); // delete the new task
+      }
     }
-    // delete selected task
-    if (this.selectedTask.title || this.selectedTask.description || this.selectedTask.reminder ) {
+      // delete selected task
+    else if (this.editMode == modalToggleStates.edit || this.editMode == modalToggleStates.view) {
+      if ( // check if changes happened
+      this.selectedTask.title != this.shadowCopy.title || 
+      this.selectedTask.description != this.shadowCopy.description
+      ) {
+        this.selectedNoteEdit();
+      }
       this.tasksService.deleteTask(this.selectedTask);
-    }*/
+      this.tasksService.refreshReminderTimeouts(this.selectedTask.reminder);
+    }
 
   }
 
@@ -131,10 +158,12 @@ export class TaskModalComponent implements OnInit {
     if (this.editMode == modalToggleStates.create) {
       reminder = this.taskModel.reminder;
       this.taskModel.reminder = 0;
+      this.newNoteEdit();
     }
     else { // (this.editMode == modalToggleStates.edit)
       reminder = this.selectedTask.reminder;
       this.selectedTask.reminder = 0;
+      this.selectedNoteEdit();
     }
     // if reminder is deleted or reminder edited or task is deleted or task is restored => hook reminder service
     this.tasksService.refreshReminderTimeouts(reminder);
@@ -144,38 +173,49 @@ export class TaskModalComponent implements OnInit {
   pinToggle() {
     if (this.editMode == modalToggleStates.create) {
       this.taskModel.pinned = !this.taskModel.pinned; 
+      this.newNoteEdit();
     }
     else { // or edit (view - pin is not shown)
       this.tasksService.pinToggle(this.selectedTask);
+      this.selectedNoteEdit();
     }
   }
 
+  // list item logic includes the specific items list
   markItem(index: number) {
+    // only items in incomplete list are marked
     console.log(index);
     if (this.editMode == modalToggleStates.create) {
       this.taskModel.complete.unshift(this.taskModel.incomplete.splice(index, 1)[0]);
+      this.newNoteEdit();
     }
     else { // or edit (view)
       this.selectedTask.complete.unshift(this.selectedTask.incomplete.splice(index, 1)[0]);
+      this.selectedNoteEdit();
     }
   }
 
   unMarkItem(index: number) {
     if (this.editMode == modalToggleStates.create) {
       this.taskModel.incomplete.unshift(this.taskModel.complete.splice(index, 1)[0]);
+      this.newNoteEdit();
     }
     else { // or edit (view)
       this.selectedTask.incomplete.unshift(this.selectedTask.complete.splice(index, 1)[0]);
+      this.selectedNoteEdit();
     }
   }
 
   addItem(event: any) {
-    this.listItem.value = '';
+    this.listItem.value = ''; // clear new item input
+    let newItem = event.target.value;
     if (this.editMode == modalToggleStates.create) {
-      this.taskModel.incomplete.unshift(event.target.value);
+      this.taskModel.incomplete.unshift(newItem);
+      this.newNoteEdit();
     }
-    else { // or edit (view): wont happen for now cause no item delete
-      
+    else { // or edit (view): no button
+      this.selectedTask.incomplete.unshift(newItem);
+      this.selectedNoteEdit();
     }
     event.preventDefault();
   }
@@ -183,9 +223,11 @@ export class TaskModalComponent implements OnInit {
   removeItem(index: number) {
     if (this.editMode == modalToggleStates.create) {
       this.taskModel.complete.splice(index, 1);
+      this.newNoteEdit();
     }
     else { // or edit (view)
       this.selectedTask.complete.splice(index, 1);
+      this.selectedNoteEdit();
     }
   }
 
